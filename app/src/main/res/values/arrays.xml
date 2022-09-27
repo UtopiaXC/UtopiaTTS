@@ -1,0 +1,63 @@
+<resources>
+    <string-array name="azure_region_entries">
+        <item>South Africa North</item>
+        <item>East Asia</item>
+        <item>South East Asia</item>
+        <item>Australia East</item>
+        <item>Central India</item>
+        <item>Japan East</item>
+        <item>Japan West</item>
+        <item>Korea Central</item>
+        <item>Canada Central</item>
+        <item>North Europe</item>
+        <item>West Europe</item>
+        <item>France Central</item>
+        <item>Germany West Central</item>
+        <item>Norway East</item>
+        <item>Switzerland North</item>
+        <item>Switzerland West</item>
+        <item>UK South</item>
+        <item>UAE North</item>
+        <item>Brazil South</item>
+        <item>Central US</item>
+        <item>East US</item>
+        <item>East US2</item>
+        <item>North Central US</item>
+        <item>South Central US</item>
+        <item>West Central US</item>
+        <item>West US</item>
+        <item>West US2</item>
+        <item>West US3</item>
+    </string-array>
+
+    <string-array name="azure_region_values">
+        <item>SOUTH_AFRICA_NORTH</item>
+        <item>EAST_ASIA</item>
+        <item>SOUTH_EAST_ASIA</item>
+        <item>AUSTRALIA_EAST</item>
+        <item>CENTRAL_INDIA</item>
+        <item>JAPAN_EAST</item>
+        <item>JAPAN_WEST</item>
+        <item>KOREA_CENTRAL</item>
+        <item>CANADA_CENTRAL</item>
+        <item>NORTH_EUROPE</item>
+        <item>WEST_EUROPE</item>
+        <item>FRANCE_CENTRAL</item>
+        <item>GERMANY_WEST_CENTRAL</item>
+        <item>NORWAY_EAST</item>
+        <item>SWITZERLAND_NORTH</item>
+        <item>SWITZERLAND_WEST</item>
+        <item>UK_SOUTH</item>
+        <item>UAE_NORTH</item>
+        <item>BRAZIL_SOUTH</item>
+        <item>CENTRAL_US</item>
+        <item>EAST_US</item>
+        <item>EAST_US2</item>
+        <item>NORTH_CENTRAL_US</item>
+        <item>SOUTH_CENTRAL_US</item>
+        <item>WEST_CENTRAL_US</item>
+        <item>WEST_US</item>
+        <item>WEST_US2</item>
+        <item>WEST_US3</item>
+    </string-array>
+</resources>

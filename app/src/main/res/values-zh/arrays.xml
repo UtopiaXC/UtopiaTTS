@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="azure_region_entries">
+        <item>南非北部 (South Africa North)</item>
+        <item>东亚 (East Asia)</item>
+        <item>东南亚 (South East Asia)</item>
+        <item>澳大利亚东部 (Australia East)</item>
+        <item>印度中部 (Central India)</item>
+        <item>日本东部 (Japan East)</item>
+        <item>日本西部 (Japan West)</item>
+        <item>韩国中部 (Korea Central)</item>
+        <item>加拿大中部 (Canada Central)</item>
+        <item>北欧 (North Europe)</item>
+        <item>西欧 (West Europe)</item>
+        <item>法国中部 (France Central)</item>
+        <item>德国中西部 (Germany West Central)</item>
+        <item>挪威东部 (Norway East)</item>
+        <item>瑞士北部 (Switzerland North)</item>
+        <item>瑞士西部 (Switzerland West)</item>
+        <item>英国南部 (UK South)</item>
+        <item>阿拉伯联合酋长国北部 (UAE North)</item>
+        <item>巴西南部 (Brazil South)</item>
+        <item>美国中部 (Central US)</item>
+        <item>美国东部 (East US)</item>
+        <item>美国东部 2 (East US2)</item>
+        <item>美国中北部 (North Central US)</item>
+        <item>美国中南部 (South Central US)</item>
+        <item>美国中西部 (West Central US)</item>
+        <item>美国西部 (West US)</item>
+        <item>美国西部 2 (West US 2)</item>
+        <item>美国西部 3 (West US 3)</item>
+    </string-array>
+</resources>

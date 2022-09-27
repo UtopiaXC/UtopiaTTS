@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fragment_tts_settings"
+        android:icon="@drawable/ic_baseline_settings_accessibility_24"
+        android:title="@string/title_tts_settings" />
+
+    <item
+        android:id="@+id/fragment_tts_usage"
+        android:icon="@drawable/ic_sharp_hearing_24"
+        android:title="@string/title_tts_usage" />
+
+    <item
+        android:id="@+id/fragment_about"
+        android:icon="@drawable/ic_baseline_code_24"
+        android:title="@string/title_about" />
+
+</menu>

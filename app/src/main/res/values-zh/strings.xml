@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Utopia TTS</string>
+    <string name="action_settings">设置</string>
+
+    <!-- Preference Titles -->
+    <string name="azure_settings">Azure设置</string>
+    <string name="tts_settings">TTS 设置</string>
+
+    <!-- Messages Preferences -->
+    <string name="azure_token">Azure密钥</string>
+    <string name="azure_region">Azure可用区</string>
+
+    <string name="title_tts_settings">TTS设置</string>
+    <string name="title_tts_usage">使用TTS</string>
+    <string name="title_about">关于</string>
+</resources>

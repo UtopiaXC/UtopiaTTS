@@ -67,7 +67,7 @@ public class MsTts {
     public void initTts() {
         Log.i(TAG, "initTts");
         SpeechConfig mSpeechConfig = SpeechConfig.fromSubscription(
-                "", Regions.EAST_ASIA.getId());
+                "9a747d329acb4958a81072d00d9514a4", Regions.EAST_ASIA.getId());
         mSpeechConfig.setSpeechSynthesisOutputFormat(
                 OutputFormat.RAW_48K_HZ_16_BIT_MONO_PCM.getSpeechSynthesisOutputFormat());
         AudioConfig audioConfig = AudioConfig.fromDefaultSpeakerOutput();

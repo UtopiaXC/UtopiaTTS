@@ -3,11 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/fragment_tts_usage">
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.utopiaxc.utopiatts.FragmentTTS"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_tts"/>
+        android:id="@+id/fragment_tts_settings"
+        android:name="com.utopiaxc.utopiatts.fragments.FragmentTtsSettings"
+        android:label="@string/app_name" />
+    <fragment
+        android:id="@+id/fragment_tts_usage"
+        android:name="com.utopiaxc.utopiatts.fragments.FragmentTtsUsage"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_tts_usage" />
+    <fragment
+        android:id="@+id/fragment_about"
+        android:name="com.utopiaxc.utopiatts.fragments.FragmentAbout"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_about" />
 </navigation>
