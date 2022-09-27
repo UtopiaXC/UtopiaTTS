@@ -1,4 +1,6 @@
-package com.utopiaxc.utopiatts.tts;
+package com.utopiaxc.utopiatts.tts.enums;
+
+import androidx.annotation.NonNull;
 
 public enum Regions {
     SOUTH_AFRICA_NORTH("SOUTH_AFRICA_NORTH", "southafricanorth"),
@@ -38,6 +40,7 @@ public enum Regions {
         mId = id;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return mName;

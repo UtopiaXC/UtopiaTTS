@@ -1,4 +1,4 @@
-package com.utopiaxc.utopiatts.tts;
+package com.utopiaxc.utopiatts.tts.enums;
 
 import android.media.AudioFormat;
 

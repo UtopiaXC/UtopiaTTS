@@ -15,7 +15,7 @@ import android.speech.tts.TextToSpeechService;
 import android.util.Log;
 
 import com.utopiaxc.utopiatts.tts.MsTts;
-import com.utopiaxc.utopiatts.tts.OutputFormat;
+import com.utopiaxc.utopiatts.tts.enums.OutputFormat;
 
 import java.util.Locale;
 
