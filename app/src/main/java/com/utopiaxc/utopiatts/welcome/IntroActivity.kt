@@ -35,6 +35,6 @@ class IntroActivity : AppIntro2() {
                 )
         )
 
-
+        addSlide(FragmentTtsSelect.newInstance(this))
     }
 }
