@@ -11,4 +11,6 @@
     <color name="welcome_bg_night">#3E3E3E</color>
     <color name="welcome_string_day">#000000</color>
     <color name="welcome_string_night">#ECECEC</color>
+    <color name="warning">#F44336</color>
+    <color name="success">#009688</color>
 </resources>

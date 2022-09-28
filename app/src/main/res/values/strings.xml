@@ -15,4 +15,19 @@
 
     <string name="welcome">Welcome to Utopia TTS</string>
     <string name="rights" translatable="false">Copyright © 2022 UtopiaXC All Rights Reserved.</string>
+
+    <string name="tips">Tips</string>
+    <string name="tips_tts_driver">The Azure SDK approach uses the official Microsoft development kit, which is fast and stable, but requires an Azure account (with 500,000 free words per month) and a token.\n\nThe WebSocket approach uses the WebSocket interface from the Microsoft TTS website\'s web demo, which is slow, unstable and at risk of not being available at any time, but does not require account registration and key generation, and is highly discouraged.</string>
+    <string name="confirm">Confirm</string>
+
+    <string name="tts_driver_title">TTS engine driven approach</string>
+    <string name="tts_driver_title_sdk">Azure SDK</string>
+    <string name="tts_driver_title_ws">WebSocket（Developing）</string>
+    <string name="warning">Warning</string>
+    <string name="warning_blank_token">Please input the token.</string>
+    <string name="warning_azure_token_not_checked">Your azure config is not checked. Please tap confirm first.</string>
+    <string name="checking">Checking</string>
+    <string name="success">Success</string>
+    <string name="error">Error</string>
+    <string name="error_azure_token">Your token or region is wrong, please check that it is correct or that the spare capacity is not exhausted, or maybe your network is not available</string>
 </resources>

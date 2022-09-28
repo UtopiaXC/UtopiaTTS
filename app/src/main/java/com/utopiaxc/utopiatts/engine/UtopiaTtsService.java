@@ -14,7 +14,13 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeechService;
 import android.util.Log;
 
+import androidx.preference.PreferenceManager;
+
+import com.utopiaxc.utopiatts.enums.SettingsEnum;
 import com.utopiaxc.utopiatts.tts.MsTts;
+import com.utopiaxc.utopiatts.tts.Tts;
+import com.utopiaxc.utopiatts.tts.WsTts;
+import com.utopiaxc.utopiatts.tts.enums.Driver;
 import com.utopiaxc.utopiatts.tts.enums.OutputFormat;
 
 import java.util.Locale;
@@ -28,20 +34,27 @@ public class UtopiaTtsService extends TextToSpeechService {
     final String notificationName = "Utopia TTS Service Notification";
     private static final int NOTIFICATION_ID = 1;
     private static final String ACTION_STOP_SERVICE = "action_stop_service";
-    private MsTts mMsTts;
+    private Tts mTts;
 
     @Override
     public void onCreate() {
         Log.i(TAG, "onCreate");
         super.onCreate();
-        mMsTts = MsTts.getInstance(getApplicationContext());
+        if (PreferenceManager.getDefaultSharedPreferences(this)
+                .getString(SettingsEnum.TTS_DRIVER.getKey(), Driver.AZURE_SDK.getId())
+                .equals(Driver.AZURE_SDK.getId())){
+            mTts=MsTts.getInstance(getApplicationContext());
+        }else{
+            mTts=WsTts.getInstance(getApplicationContext());
+        }
+        mTts = MsTts.getInstance(getApplicationContext());
         startForegroundService();
     }
 
     @Override
     public void onDestroy() {
         Log.i(TAG, "onDestroy");
-        mMsTts.stopSpeak();
+        mTts.stopSpeak();
         super.onDestroy();
     }
 
@@ -80,7 +93,7 @@ public class UtopiaTtsService extends TextToSpeechService {
     @Override
     protected void onStop() {
         Log.i(TAG, "onStop");
-        mMsTts.stopSpeak();
+        mTts.stopSpeak();
     }
 
     //disable audio format wrong
@@ -98,7 +111,7 @@ public class UtopiaTtsService extends TextToSpeechService {
         }
         synthesisCallback.start(OutputFormat.RAW_48K_HZ_16_BIT_MONO_PCM.getSoundFrequency(),
                 OutputFormat.RAW_48K_HZ_16_BIT_MONO_PCM.getAudioFormat(), 1);
-        mMsTts.doSpeak(synthesisRequest.getCharSequenceText().toString(),
+        mTts.doSpeak(synthesisRequest.getCharSequenceText().toString(),
                 synthesisRequest.getPitch(), synthesisRequest.getSpeechRate());
     }
 

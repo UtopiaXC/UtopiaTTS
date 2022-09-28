@@ -14,6 +14,8 @@ import androidx.preference.PreferenceManager;
 import com.utopiaxc.utopiatts.databinding.ActivityMainBinding;
 import com.utopiaxc.utopiatts.enums.SettingsEnum;
 import com.utopiaxc.utopiatts.tts.MsTts;
+import com.utopiaxc.utopiatts.tts.WsTts;
+import com.utopiaxc.utopiatts.tts.enums.Driver;
 import com.utopiaxc.utopiatts.utils.ThemeUtil;
 import com.utopiaxc.utopiatts.welcome.IntroActivity;
 
@@ -38,7 +40,15 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
-        MsTts.getInstance(getApplicationContext());
+
+        //Init tts engine
+        if (sharedPreferences.getString(SettingsEnum.TTS_DRIVER.getKey(), Driver.AZURE_SDK.getId())
+                .equals(Driver.AZURE_SDK.getId())){
+            MsTts.getInstance(getApplicationContext());
+        }else{
+            WsTts.getInstance(getApplicationContext());
+        }
+
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.fragment_tts_settings, R.id.fragment_tts_usage, R.id.fragment_about)
                 .build();

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".welcome.FragmentSetAzureToken">
+
+    <TextView
+        android:id="@+id/text_view_set_azure_token_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="@string/azure_settings"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text_azure_token"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_set_azure_token"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="350dp"
+        android:text="@string/confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_text_azure_token"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_azure_region"
+        app:layout_constraintEnd_toStartOf="@+id/button_azure_token_help"
+        app:layout_constraintStart_toEndOf="@+id/text_view_azure_token_label"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_set_azure_token_title" />
+
+    <ImageButton
+        android:id="@+id/button_azure_token_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:background="#00000000"
+        android:src="@drawable/ic_baseline_help_outline_24"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_azure_region"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_azure_token"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_set_azure_token_title"
+        tools:ignore="ContentDescription" />
+
+    <Spinner
+        android:id="@+id/spinner_azure_region"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:entries="@array/azure_region_entries"
+        app:layout_constraintBottom_toTopOf="@+id/button_set_azure_token"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_view_azure_region_label"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_azure_token" />
+
+    <TextView
+        android:id="@+id/text_view_azure_token_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/azure_token"
+        android:labelFor="@+id/edit_text_azure_token"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_azure_region_label"
+        app:layout_constraintEnd_toStartOf="@+id/edit_text_azure_token"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_set_azure_token_title" />
+
+    <TextView
+        android:id="@+id/text_view_azure_region_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/azure_region"
+        app:layout_constraintBottom_toTopOf="@+id/button_set_azure_token"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_azure_region"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_azure_token_label" />
+</androidx.constraintlayout.widget.ConstraintLayout>

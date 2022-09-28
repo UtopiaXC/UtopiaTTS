@@ -5,6 +5,7 @@
         <EditTextPreference
             app:key="azure_token"
             app:title="@string/azure_token"
+            app:summary="@string/azure_region"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference

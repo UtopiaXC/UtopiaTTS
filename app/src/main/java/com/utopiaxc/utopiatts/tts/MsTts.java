@@ -7,7 +7,10 @@ import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
+import com.microsoft.cognitiveservices.speech.CancellationReason;
+import com.microsoft.cognitiveservices.speech.ResultReason;
 import com.microsoft.cognitiveservices.speech.SpeechConfig;
+import com.microsoft.cognitiveservices.speech.SpeechSynthesisCancellationDetails;
 import com.microsoft.cognitiveservices.speech.SpeechSynthesisResult;
 import com.microsoft.cognitiveservices.speech.SpeechSynthesizer;
 import com.microsoft.cognitiveservices.speech.audio.AudioConfig;
@@ -19,11 +22,12 @@ import com.utopiaxc.utopiatts.tts.enums.Roles;
 import com.utopiaxc.utopiatts.tts.enums.Styles;
 import com.utopiaxc.utopiatts.tts.utils.Ssml;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-public class MsTts {
+public class MsTts implements Tts{
     private static final String TAG = "MsTts";
-    private static volatile MsTts mInstance;
+    private static volatile Tts mInstance;
     private SpeechSynthesizer mSpeechSynthesizer;
     SharedPreferences mSharedPreferences;
 
@@ -32,7 +36,7 @@ public class MsTts {
         initTts();
     }
 
-    public static MsTts getInstance(Context context) {
+    public static Tts getInstance(Context context) {
         if (mInstance == null) {
             synchronized (MsTts.class) {
                 if (mInstance == null) {
@@ -43,6 +47,7 @@ public class MsTts {
         return mInstance;
     }
 
+    @Override
     public void doSpeak(String text, int pitch, int rate) {
         Actors actor = Actors.getActor(
                 mSharedPreferences.getString(SettingsEnum.ACTOR.getKey(),
@@ -57,42 +62,73 @@ public class MsTts {
                 (Integer) SettingsEnum.STYLE_DEGREE.getDefaultValue());
         Ssml ssml = new Ssml(text, actor.getId(), pitch,
                 rate, role.getId(), style.getId(), styleDegree);
-        Future<SpeechSynthesisResult> speechSynthesisResultFuture =
-                mSpeechSynthesizer.SpeakSsmlAsync(ssml.toString());
-        while (!speechSynthesisResultFuture.isDone()) {
-            if (speechSynthesisResultFuture.isCancelled()) {
-                Log.d(TAG, "speechSynthesisResultFuture.isCancelled");
-                break;
+        try {
+            SpeechSynthesisResult speechRecognitionResult =
+                    mSpeechSynthesizer.SpeakSsmlAsync(ssml.toString()).get();
+            if (speechRecognitionResult.getReason() == ResultReason.SynthesizingAudioCompleted) {
+                Log.d(TAG,"Speech synthesized to speaker for text = " + text);
+            } else if (speechRecognitionResult.getReason() == ResultReason.Canceled) {
+                SpeechSynthesisCancellationDetails cancellation =
+                        SpeechSynthesisCancellationDetails.fromResult(speechRecognitionResult);
+                if (cancellation.getReason() == CancellationReason.Error) {
+                    Log.e(TAG,"Speech synthesized error");
+                }
             }
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
+    @Override
     public void stopSpeak() {
         if (mSpeechSynthesizer != null) {
             mSpeechSynthesizer.StopSpeakingAsync();
         }
     }
 
-    public SpeechSynthesizer getSpeechSynthesizer() {
-        return mSpeechSynthesizer;
-    }
-
+    @Override
     public void initTts() {
         Log.i(TAG, "initTts");
         Regions region = Regions.getRegion(
                 mSharedPreferences.getString(
                         SettingsEnum.AZURE_REGION.getKey(),
                         (String) SettingsEnum.AZURE_REGION.getDefaultValue()));
-        SpeechConfig mSpeechConfig = SpeechConfig.fromSubscription(
-                mSharedPreferences.getString(
-                        SettingsEnum.AZURE_TOKEN.getKey(),
-                        (String) SettingsEnum.AZURE_TOKEN.getDefaultValue()), region.getId());
+        String token=mSharedPreferences.getString(
+                SettingsEnum.AZURE_TOKEN.getKey(),
+                (String) SettingsEnum.AZURE_TOKEN.getDefaultValue());
+        if ("".equals(token)){
+            token=(String) SettingsEnum.AZURE_TOKEN.getDefaultValue();
+        }
+        SpeechConfig speechConfig = SpeechConfig.fromSubscription(token, region.getId());
         OutputFormat outputFormat = OutputFormat.getOutputFormat(
                 mSharedPreferences.getString(
                         SettingsEnum.OUTPUT_FORMAT.getKey(),
                         (String) SettingsEnum.OUTPUT_FORMAT.getDefaultValue()));
-        mSpeechConfig.setSpeechSynthesisOutputFormat(outputFormat.getSpeechSynthesisOutputFormat());
+        speechConfig.setSpeechSynthesisOutputFormat(outputFormat.getSpeechSynthesisOutputFormat());
         AudioConfig audioConfig = AudioConfig.fromDefaultSpeakerOutput();
-        mSpeechSynthesizer = new SpeechSynthesizer(mSpeechConfig, audioConfig);
+        mSpeechSynthesizer = new SpeechSynthesizer(speechConfig, audioConfig);
+    }
+
+    public static boolean testAzureConfig(String token,String region){
+        SpeechConfig speechConfig = SpeechConfig.fromSubscription(token, region);
+        SpeechSynthesizer speechSynthesizer=new SpeechSynthesizer(speechConfig,null);
+        try {
+            SpeechSynthesisResult speechRecognitionResult =
+                    speechSynthesizer.SpeakTextAsync("").get();
+            if (speechRecognitionResult.getReason() == ResultReason.SynthesizingAudioCompleted) {
+                return true;
+            }
+            else if (speechRecognitionResult.getReason() == ResultReason.Canceled) {
+                SpeechSynthesisCancellationDetails cancellation =
+                        SpeechSynthesisCancellationDetails.fromResult(speechRecognitionResult);
+                if (cancellation.getReason() == CancellationReason.Error) {
+                    return false;
+                }
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 }
