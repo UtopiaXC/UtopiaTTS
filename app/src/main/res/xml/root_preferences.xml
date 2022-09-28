@@ -3,14 +3,14 @@
     <PreferenceCategory app:title="@string/azure_settings">
 
         <EditTextPreference
-            app:key="signature"
+            app:key="azure_token"
             app:title="@string/azure_token"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
             app:entries="@array/azure_region_entries"
             app:entryValues="@array/azure_region_values"
-            app:key="reply"
+            app:key="azure_region"
             app:title="@string/azure_region"
             app:useSimpleSummaryProvider="true" />
 

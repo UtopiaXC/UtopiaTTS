@@ -14,4 +14,7 @@
     <string name="title_tts_settings">TTS设置</string>
     <string name="title_tts_usage">使用TTS</string>
     <string name="title_about">关于</string>
+
+    <string name="welcome">欢迎使用 Utopia TTS</string>
+    <string name="rights" translatable="false">Copyright © 2022 UtopiaXC All Rights Reserved.</string>
 </resources>

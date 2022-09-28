@@ -161,6 +161,6 @@ public enum OutputFormat {
                 return outputFormat;
             }
         }
-        return null;
+        return RAW_48K_HZ_16_BIT_MONO_PCM;
     }
 }

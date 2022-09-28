@@ -46,6 +46,6 @@ public enum Styles {
                 return style;
             }
         }
-        return null;
+        return NONE;
     }
 }

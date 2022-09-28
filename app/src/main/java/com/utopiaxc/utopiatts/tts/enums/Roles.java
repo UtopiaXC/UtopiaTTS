@@ -34,6 +34,6 @@ public enum Roles {
                 return role;
             }
         }
-        return null;
+        return NONE;
     }
 }

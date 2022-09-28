@@ -2,12 +2,16 @@ package com.utopiaxc.utopiatts.tts;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
+
+import androidx.preference.PreferenceManager;
 
 import com.microsoft.cognitiveservices.speech.SpeechConfig;
 import com.microsoft.cognitiveservices.speech.SpeechSynthesisResult;
 import com.microsoft.cognitiveservices.speech.SpeechSynthesizer;
 import com.microsoft.cognitiveservices.speech.audio.AudioConfig;
+import com.utopiaxc.utopiatts.enums.SettingsEnum;
 import com.utopiaxc.utopiatts.tts.enums.Actors;
 import com.utopiaxc.utopiatts.tts.enums.OutputFormat;
 import com.utopiaxc.utopiatts.tts.enums.Regions;
@@ -19,14 +23,12 @@ import java.util.concurrent.Future;
 
 public class MsTts {
     private static final String TAG = "MsTts";
-    //Here use getApplicationContext to avoid memory leak
-    @SuppressLint("StaticFieldLeak")
     private static volatile MsTts mInstance;
-    private final Context mContext;
     private SpeechSynthesizer mSpeechSynthesizer;
+    SharedPreferences mSharedPreferences;
 
     public MsTts(Context context) {
-        mContext = context;
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         initTts();
     }
 
@@ -42,8 +44,19 @@ public class MsTts {
     }
 
     public void doSpeak(String text, int pitch, int rate) {
-        Ssml ssml = new Ssml(text, Actors.ZH_CN_XIAOXIAO_NEURAL.getId(), pitch,
-                rate, Roles.NONE.getId(), Styles.NONE.getId(), 0);
+        Actors actor = Actors.getActor(
+                mSharedPreferences.getString(SettingsEnum.ACTOR.getKey(),
+                        (String) SettingsEnum.ACTOR.getDefaultValue()));
+        Roles role = Roles.getRole(
+                mSharedPreferences.getString(SettingsEnum.ROLE.getKey(),
+                        (String) SettingsEnum.ROLE.getDefaultValue()));
+        Styles style = Styles.getStyle(
+                mSharedPreferences.getString(SettingsEnum.ROLE.getKey(),
+                        (String) SettingsEnum.ROLE.getDefaultValue()));
+        int styleDegree = mSharedPreferences.getInt(SettingsEnum.STYLE_DEGREE.getKey(),
+                (Integer) SettingsEnum.STYLE_DEGREE.getDefaultValue());
+        Ssml ssml = new Ssml(text, actor.getId(), pitch,
+                rate, role.getId(), style.getId(), styleDegree);
         Future<SpeechSynthesisResult> speechSynthesisResultFuture =
                 mSpeechSynthesizer.SpeakSsmlAsync(ssml.toString());
         while (!speechSynthesisResultFuture.isDone()) {
@@ -66,10 +79,19 @@ public class MsTts {
 
     public void initTts() {
         Log.i(TAG, "initTts");
+        Regions region = Regions.getRegion(
+                mSharedPreferences.getString(
+                        SettingsEnum.AZURE_REGION.getKey(),
+                        (String) SettingsEnum.AZURE_REGION.getDefaultValue()));
         SpeechConfig mSpeechConfig = SpeechConfig.fromSubscription(
-                "9a747d329acb4958a81072d00d9514a4", Regions.EAST_ASIA.getId());
-        mSpeechConfig.setSpeechSynthesisOutputFormat(
-                OutputFormat.RAW_48K_HZ_16_BIT_MONO_PCM.getSpeechSynthesisOutputFormat());
+                mSharedPreferences.getString(
+                        SettingsEnum.AZURE_TOKEN.getKey(),
+                        (String) SettingsEnum.AZURE_TOKEN.getDefaultValue()), region.getId());
+        OutputFormat outputFormat = OutputFormat.getOutputFormat(
+                mSharedPreferences.getString(
+                        SettingsEnum.OUTPUT_FORMAT.getKey(),
+                        (String) SettingsEnum.OUTPUT_FORMAT.getDefaultValue()));
+        mSpeechConfig.setSpeechSynthesisOutputFormat(outputFormat.getSpeechSynthesisOutputFormat());
         AudioConfig audioConfig = AudioConfig.fromDefaultSpeakerOutput();
         mSpeechSynthesizer = new SpeechSynthesizer(mSpeechConfig, audioConfig);
     }
