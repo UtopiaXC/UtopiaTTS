@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         com.utopiaxc.utopiatts.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //Fragment管理器与导航
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.fragment_tts_settings, R.id.fragment_tts_usage, R.id.fragment_about)
                 .build();
