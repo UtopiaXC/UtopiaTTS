@@ -30,4 +30,9 @@
     <string name="success">Success</string>
     <string name="error">Error</string>
     <string name="error_azure_token">Your token or region is wrong, please check that it is correct or that the spare capacity is not exhausted, or maybe your network is not available</string>
+    <string name="success_azure_token">Your token is available, set successful.</string>
+    <string name="actor">Voice Actor</string>
+    <string name="region_not_support_pre">The region you set is not support preview actor, please change region first.Now, the support region are East US, West Europe and Southeast Asia</string>
+    <string name="actor_is_pre">The voice actor you set is preview, you should only select region which is supported preview.</string>
+    <string name="voice_style">Voice Style</string>
 </resources>

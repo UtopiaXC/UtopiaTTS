@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.speech.tts.SynthesisCallback;
 import android.speech.tts.SynthesisRequest;
@@ -42,12 +43,11 @@ public class UtopiaTtsService extends TextToSpeechService {
         super.onCreate();
         if (PreferenceManager.getDefaultSharedPreferences(this)
                 .getString(SettingsEnum.TTS_DRIVER.getKey(), Driver.AZURE_SDK.getId())
-                .equals(Driver.AZURE_SDK.getId())){
-            mTts=MsTts.getInstance(getApplicationContext());
-        }else{
-            mTts=WsTts.getInstance(getApplicationContext());
+                .equals(Driver.AZURE_SDK.getId())) {
+            mTts = MsTts.getInstance(getApplicationContext());
+        } else {
+            mTts = WsTts.getInstance(getApplicationContext());
         }
-        mTts = MsTts.getInstance(getApplicationContext());
         startForegroundService();
     }
 
@@ -109,10 +109,20 @@ public class UtopiaTtsService extends TextToSpeechService {
             Log.i(TAG, "LANG_NOT_SUPPORTED");
             return;
         }
-        synthesisCallback.start(OutputFormat.RAW_48K_HZ_16_BIT_MONO_PCM.getSoundFrequency(),
-                OutputFormat.RAW_48K_HZ_16_BIT_MONO_PCM.getAudioFormat(), 1);
-        mTts.doSpeak(synthesisRequest.getCharSequenceText().toString(),
-                synthesisRequest.getPitch(), synthesisRequest.getSpeechRate());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        OutputFormat outputFormat = OutputFormat.getOutputFormat(
+                preferences.getString(SettingsEnum.OUTPUT_FORMAT.getKey(),
+                        (String) SettingsEnum.OUTPUT_FORMAT.getDefaultValue()));
+        synthesisCallback.start(outputFormat.getSoundFrequency(),
+                outputFormat.getAudioFormat(), 1);
+        if (mTts.doSpeak(synthesisRequest.getCharSequenceText().toString(),
+                synthesisRequest.getPitch(), synthesisRequest.getSpeechRate())) {
+
+            synthesisCallback.done();
+        } else {
+
+            synthesisCallback.error();
+        }
     }
 
     private void startForegroundService() {

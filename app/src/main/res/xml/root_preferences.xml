@@ -1,12 +1,13 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/azure_settings">
 
         <EditTextPreference
             app:key="azure_token"
+            app:singleLineTitle="true"
             app:title="@string/azure_token"
-            app:summary="@string/azure_region"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="false" />
 
         <ListPreference
             app:entries="@array/azure_region_entries"
@@ -20,6 +21,19 @@
     <PreferenceCategory app:title="@string/tts_settings">
 
 
+        <ListPreference
+            android:entries="@array/tts_actors_entries"
+            android:entryValues="@array/tts_actors_values"
+            android:key="actor"
+            android:title="@string/actor"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            android:entries="@array/tts_style_entries"
+            android:entryValues="@array/tts_style_values"
+            android:key="style"
+            android:title="@string/voice_style"
+            app:useSimpleSummaryProvider="true"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

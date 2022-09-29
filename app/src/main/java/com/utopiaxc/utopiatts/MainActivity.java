@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             WsTts.getInstance(getApplicationContext());
         }
-
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.fragment_tts_settings, R.id.fragment_tts_usage, R.id.fragment_about)
                 .build();

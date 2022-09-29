@@ -31,4 +31,9 @@
     <string name="success">成功</string>
     <string name="error">错误</string>
     <string name="error_azure_token">您的Azure密钥或可用区错误，请检查其是否正确或余量是否用尽，或检查您的网络是否可以访问微软对应服务器。</string>
+    <string name="success_azure_token">您的Azure密钥验证成功，已设置。</string>
+    <string name="actor">语音演员</string>
+    <string name="region_not_support_pre">当前所选地区不支持预览版语音，请先选择支持的区域。目前支持预览版的可用区为：美国东部、西欧和东南亚</string>
+    <string name="actor_is_pre">您当前选中的语音演员为预览版，您需要选择支持预览版的地区，或先切换成非预览版的语音演员。</string>
+    <string name="voice_style">声音风格</string>
 </resources>

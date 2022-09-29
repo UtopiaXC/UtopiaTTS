@@ -1,6 +1,5 @@
 package com.utopiaxc.utopiatts.tts;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -23,7 +22,6 @@ import com.utopiaxc.utopiatts.tts.enums.Styles;
 import com.utopiaxc.utopiatts.tts.utils.Ssml;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 public class MsTts implements Tts{
     private static final String TAG = "MsTts";
@@ -48,7 +46,7 @@ public class MsTts implements Tts{
     }
 
     @Override
-    public void doSpeak(String text, int pitch, int rate) {
+    public boolean doSpeak(String text, int pitch, int rate) {
         Actors actor = Actors.getActor(
                 mSharedPreferences.getString(SettingsEnum.ACTOR.getKey(),
                         (String) SettingsEnum.ACTOR.getDefaultValue()));
@@ -56,8 +54,8 @@ public class MsTts implements Tts{
                 mSharedPreferences.getString(SettingsEnum.ROLE.getKey(),
                         (String) SettingsEnum.ROLE.getDefaultValue()));
         Styles style = Styles.getStyle(
-                mSharedPreferences.getString(SettingsEnum.ROLE.getKey(),
-                        (String) SettingsEnum.ROLE.getDefaultValue()));
+                mSharedPreferences.getString(SettingsEnum.STYLE.getKey(),
+                        (String) SettingsEnum.STYLE.getDefaultValue()));
         int styleDegree = mSharedPreferences.getInt(SettingsEnum.STYLE_DEGREE.getKey(),
                 (Integer) SettingsEnum.STYLE_DEGREE.getDefaultValue());
         Ssml ssml = new Ssml(text, actor.getId(), pitch,
@@ -67,16 +65,19 @@ public class MsTts implements Tts{
                     mSpeechSynthesizer.SpeakSsmlAsync(ssml.toString()).get();
             if (speechRecognitionResult.getReason() == ResultReason.SynthesizingAudioCompleted) {
                 Log.d(TAG,"Speech synthesized to speaker for text = " + text);
+                return true;
             } else if (speechRecognitionResult.getReason() == ResultReason.Canceled) {
                 SpeechSynthesisCancellationDetails cancellation =
                         SpeechSynthesisCancellationDetails.fromResult(speechRecognitionResult);
                 if (cancellation.getReason() == CancellationReason.Error) {
                     Log.e(TAG,"Speech synthesized error");
+                    Log.e(TAG,cancellation.getErrorDetails());
                 }
             }
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     @Override

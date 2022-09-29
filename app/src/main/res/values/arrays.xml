@@ -2,7 +2,7 @@
     <string-array name="azure_region_entries">
         <item>South Africa North</item>
         <item>East Asia</item>
-        <item>South East Asia</item>
+        <item>South East Asia (Support Preview)</item>
         <item>Australia East</item>
         <item>Central India</item>
         <item>Japan East</item>
@@ -10,7 +10,7 @@
         <item>Korea Central</item>
         <item>Canada Central</item>
         <item>North Europe</item>
-        <item>West Europe</item>
+        <item>West Europe (Support Preview)</item>
         <item>France Central</item>
         <item>Germany West Central</item>
         <item>Norway East</item>
@@ -20,14 +20,14 @@
         <item>UAE North</item>
         <item>Brazil South</item>
         <item>Central US</item>
-        <item>East US</item>
-        <item>East US2</item>
+        <item>East US (Support Preview)</item>
+        <item>East US 2 (Support Preview)</item>
         <item>North Central US</item>
         <item>South Central US</item>
         <item>West Central US</item>
         <item>West US</item>
-        <item>West US2</item>
-        <item>West US3</item>
+        <item>West US 2</item>
+        <item>West US 3</item>
     </string-array>
 
     <string-array name="azure_region_values">
@@ -59,5 +59,124 @@
         <item>WEST_US</item>
         <item>WEST_US2</item>
         <item>WEST_US3</item>
+    </string-array>
+
+    <string-array name="tts_actors_entries">
+        <item>China Chinese XiaoChen (Female)</item>
+        <item>China Chinese XiaoHan (Female)</item>
+        <item>China Chinese XiaoMeng (Female,Preview)</item>
+        <item>China Chinese XiaoMo (Female)</item>
+        <item>China Chinese XiaoQiu (Female)</item>
+        <item>China Chinese XiaoRiu (Female)</item>
+        <item>China Chinese XiaoShuang (Female)</item>
+        <item>China Chinese XiaoXiao (Female)</item>
+        <item>China Chinese XiaoXuan (Female)</item>
+        <item>China Chinese XiaoYan (Female)</item>
+        <item>China Chinese XiaoYi (Female,Preview)</item>
+        <item>China Chinese XiaoYou (Female)</item>
+        <item>China Chinese XiaoZhen (Female,Preview)</item>
+        <item>China Chinese YunFeng (Male,Preview)</item>
+        <item>China Chinese YunHao (Male,Preview)</item>
+        <item>China Chinese YunJian (Male,Preview)</item>
+        <item>China Chinese YunXia (Male,Preview)</item>
+        <item>China Chinese YunXi (Male)</item>
+        <item>China Chinese YunYang (Male)</item>
+        <item>China Chinese YunYe (Male)</item>
+        <item>China Chinese YunZe (Male)</item>
+        <item>China Chinese(Henan) YunDeng(Male,Preview)</item>
+        <item>China Chinese(Liaoning) XiaoBei(Female,Preview)</item>
+        <item>China Chinese(Shaanxi) XiaoNi(Female,Preview)</item>
+        <item>China Chinese(Shandong) YunXiang(Male,Preview)</item>
+        <item>China Chinese(Sichuan) YunXi(Male,Preview)</item>
+        <item>China Chinese(HongKong) HiuGaai(Female)</item>
+        <item>China Chinese(HongKong) HiuMaan(Female)</item>
+        <item>China Chinese(HongKong) WanLung(Male)</item>
+        <item>China Chinese(TaiWan) HsiaoChen(Female)</item>
+        <item>China Chinese(TaiWan) HsiaoYu(Female)</item>
+        <item>China Chinese(TaiWan) YunJhe(Male)</item>
+    </string-array>
+
+    <string-array name="tts_actors_values">
+        <item>ZH_CN_XIAOCHEN_NEURAL</item>
+        <item>ZH_CN_XIAOHAN_NEURAL</item>
+        <item>ZH_CN_XIAOMENG_NEURAL</item>
+        <item>ZH_CN_XIAOMO_NEURAL</item>
+        <item>ZH_CN_XIAOQIU_NEURAL</item>
+        <item>ZH_CN_XIAORUI_NEURAL</item>
+        <item>ZH_CN_XIAOSHUANG_NEURAL</item>
+        <item>ZH_CN_XIAOXIAO_NEURAL</item>
+        <item>ZH_CN_XIAOXUAN_NEURAL</item>
+        <item>ZH_CN_XIAOYAN_NEURAL</item>
+        <item>ZH_CN_XIAOYI_NEURAL</item>
+        <item>ZH_CN_XIAOYOU_NEURAL</item>
+        <item>ZH_CN_XIAOZHEN_NEURAL</item>
+        <item>ZH_CN_YUNFENG_NEURAL</item>
+        <item>ZH_CN_YUNHAO_NEURAL</item>
+        <item>ZH_CN_YUNJIAN_NEURAL</item>
+        <item>ZH_CN_YUNXIA_NEURAL</item>
+        <item>ZH_CN_YUNXI_NEURAL</item>
+        <item>ZH_CN_YUNYANG_NEURAL</item>
+        <item>ZH_CN_YUNYE_NEURAL</item>
+        <item>ZH_CN_YUNZE_NEURAL</item>
+        <item>ZH_CN_HENAN_YUNDENG_NEURAL</item>
+        <item>ZH_CN_LIAONING_XIAOBEI_NEURAL</item>
+        <item>ZH_CN_SHAANXI_XIAONI_NEURAL</item>
+        <item>ZH_CN_SHANDONG_YUNXIANG_NEURAL</item>
+        <item>ZH_CN_SICHUAN_YUNXI_NEURAL</item>
+        <item>ZH_HK_HIUGAAI_NEURAL</item>
+        <item>ZH_HK_HIUMAAN_NEURAL</item>
+        <item>ZH_HK_WANLUNG_NEURAL</item>
+        <item>ZH_TW_HSIAOCHEN_NEURAL</item>
+        <item>ZH_TW_HSIAOYU_NEURAL</item>
+        <item>ZH_TW_YUNJHE_NEURAL</item>
+    </string-array>
+
+    <string-array name="tts_style_entries">
+        <item>None</item>
+        <item>Calm</item>
+        <item>Fearful</item>
+        <item>Cheerful</item>
+        <item>Disgruntled</item>
+        <item>Serious</item>
+        <item>Angry</item>
+        <item>Gentle</item>
+        <item>Affectionate</item>
+        <item>Embarrassed</item>
+        <item>Depressed</item>
+        <item>Envious</item>
+        <item>Assistant</item>
+        <item>Customer Service</item>
+        <item>Newscast</item>
+        <item>Lyrical</item>
+        <item>Poetry Reading</item>
+        <item>Advertisement Upbeat</item>
+        <item>Sports Commentary</item>
+        <item>Sports Commentary Excited</item>
+        <item>Narration Relaxed</item>
+        <item>Documentary Narration</item>
+    </string-array>
+
+    <string-array name="tts_style_values">
+        <item>NONE</item>
+        <item>CALM</item>
+        <item>FEARFUL</item>
+        <item>CHEERFUL</item>
+        <item>DISGRUNTLED</item>
+        <item>SERIOUS</item>
+        <item>ANGRY</item>
+        <item>GENTLE</item>
+        <item>AFFECTIONATE</item>
+        <item>EMBARRASSED</item>
+        <item>DEPRESSED</item>
+        <item>ENVIOUS</item>
+        <item>ASSISTANT</item>
+        <item>CUSTOMER_SERVICE</item>
+        <item>NEWSCAST</item>
+        <item>LYRICAL</item>
+        <item>ADVERTISEMENT_UPBEAT</item>
+        <item>SPORTS_COMMENTARY</item>
+        <item>SPORTS_COMMENTARY_EXCITED</item>
+        <item>NARRATION_RELAXED</item>
+        <item>DOCUMENTARY_NARRATION</item>
     </string-array>
 </resources>

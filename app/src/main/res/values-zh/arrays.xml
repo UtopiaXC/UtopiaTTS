@@ -1,33 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="azure_region_entries">
-        <item>南非北部 (South Africa North)</item>
-        <item>东亚 (East Asia)</item>
-        <item>东南亚 (South East Asia)</item>
-        <item>澳大利亚东部 (Australia East)</item>
-        <item>印度中部 (Central India)</item>
-        <item>日本东部 (Japan East)</item>
-        <item>日本西部 (Japan West)</item>
-        <item>韩国中部 (Korea Central)</item>
-        <item>加拿大中部 (Canada Central)</item>
-        <item>北欧 (North Europe)</item>
-        <item>西欧 (West Europe)</item>
-        <item>法国中部 (France Central)</item>
-        <item>德国中西部 (Germany West Central)</item>
-        <item>挪威东部 (Norway East)</item>
-        <item>瑞士北部 (Switzerland North)</item>
-        <item>瑞士西部 (Switzerland West)</item>
-        <item>英国南部 (UK South)</item>
-        <item>阿拉伯联合酋长国北部 (UAE North)</item>
-        <item>巴西南部 (Brazil South)</item>
-        <item>美国中部 (Central US)</item>
-        <item>美国东部 (East US)</item>
-        <item>美国东部 2 (East US2)</item>
-        <item>美国中北部 (North Central US)</item>
-        <item>美国中南部 (South Central US)</item>
-        <item>美国中西部 (West Central US)</item>
-        <item>美国西部 (West US)</item>
-        <item>美国西部 2 (West US 2)</item>
-        <item>美国西部 3 (West US 3)</item>
+        <item>南非北部</item>
+        <item>东亚</item>
+        <item>东南亚 (支持预览)</item>
+        <item>澳大利亚东部</item>
+        <item>印度中部</item>
+        <item>日本东部</item>
+        <item>日本西部</item>
+        <item>韩国中部</item>
+        <item>加拿大中部</item>
+        <item>北欧</item>
+        <item>西欧 (支持预览)</item>
+        <item>法国中部</item>
+        <item>德国中西部</item>
+        <item>挪威东部</item>
+        <item>瑞士北部</item>
+        <item>瑞士西部</item>
+        <item>英国南部</item>
+        <item>阿拉伯联合酋长国北部</item>
+        <item>巴西南部</item>
+        <item>美国中部</item>
+        <item>美国东部 (支持预览)</item>
+        <item>美国东部 2 (支持预览)</item>
+        <item>美国中北部</item>
+        <item>美国中南部</item>
+        <item>美国中西部</item>
+        <item>美国西部</item>
+        <item>美国西部 2</item>
+        <item>美国西部 3</item>
+    </string-array>
+
+    <string-array name="tts_actors_entries">
+        <item>中国大陆 中文 晓晨（女）</item>
+        <item>中国大陆 中文 晓涵（女）</item>
+        <item>中国大陆 中文 晓梦（女、预览）</item>
+        <item>中国大陆 中文 晓墨（女）</item>
+        <item>中国大陆 中文 晓秋（女）</item>
+        <item>中国大陆 中文 晓睿（女）</item>
+        <item>中国大陆 中文 晓双（女）</item>
+        <item>中国大陆 中文 晓晓（女）</item>
+        <item>中国大陆 中文 晓萱（女）</item>
+        <item>中国大陆 中文 晓颜（女）</item>
+        <item>中国大陆 中文 晓伊（女、预览）</item>
+        <item>中国大陆 中文 晓悠（女）</item>
+        <item>中国大陆 中文 晓甄（女、预览）</item>
+        <item>中国大陆 中文 云枫（男、预览）</item>
+        <item>中国大陆 中文 云皓（男、预览）</item>
+        <item>中国大陆 中文 云健（男、预览）</item>
+        <item>中国大陆 中文 云夏（男、预览）</item>
+        <item>中国大陆 中文 云希（男）</item>
+        <item>中国大陆 中文 云扬（男）</item>
+        <item>中国大陆 中文 云野（男）</item>
+        <item>中国大陆 中文 云泽（男、预览）</item>
+        <item>中国河南 中文 云登（男、预览）</item>
+        <item>中国辽宁 中文 晓北（女、预览）</item>
+        <item>中国陕西 中文 晓妮（女、预览）</item>
+        <item>中国山东 中文 云飞（男、预览）</item>
+        <item>中国四川 中文 云希（男、预览）</item>
+        <item>中国香港 中文 曉佳（女）</item>
+        <item>中国香港 中文 曉曼（女）</item>
+        <item>中国香港 中文 雲龍（男）</item>
+        <item>中国台湾 中文 曉臻（女）</item>
+        <item>中国台湾 中文 曉雨（女）</item>
+        <item>中国台湾 中文 雲哲（女）</item>
+    </string-array>
+
+    <string-array name="tts_style_entries">
+        <item>无</item>
+        <item>冷静</item>
+        <item>害怕</item>
+        <item>喜悦</item>
+        <item>不满</item>
+        <item>严肃</item>
+        <item>生气</item>
+        <item>绅士</item>
+        <item>亲切</item>
+        <item>尴尬</item>
+        <item>低沉</item>
+        <item>羡慕</item>
+        <item>助理</item>
+        <item>客服</item>
+        <item>新闻</item>
+        <item>抒情</item>
+        <item>朗诵</item>
+        <item>发奋</item>
+        <item>体育解说</item>
+        <item>兴奋地体育解说</item>
+        <item>轻松叙事</item>
+        <item>纪录片解说</item>
     </string-array>
 </resources>

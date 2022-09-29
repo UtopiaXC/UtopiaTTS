@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-public class WsTts implements Tts{
+public class WsTts implements Tts {
     private static final String TAG = "WsTts";
     private static volatile Tts mInstance;
     SharedPreferences mSharedPreferences;
@@ -27,8 +27,8 @@ public class WsTts implements Tts{
     }
 
     @Override
-    public void doSpeak(String text, int pitch, int rate) {
-
+    public boolean doSpeak(String text, int pitch, int rate) {
+        return false;
     }
 
     @Override

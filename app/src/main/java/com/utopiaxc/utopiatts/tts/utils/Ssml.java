@@ -39,7 +39,7 @@ public class Ssml {
             if (!"".equals(mStyle)) {
                 sb.append("style=\"").append(mStyle).append("\" styledegree=\"").append(mStyleDegree).append("\" ");
             }
-            sb.append("></mstts:express-as>");
+            sb.append(">");
         }
         sb.append("<prosody rate=\"").append(mRate).append("%\" pitch=\"").append(mPitch).append("%\">");
         sb.append(mText);
