@@ -16,6 +16,5 @@
     <fragment
         android:id="@+id/fragment_about"
         android:name="com.utopiaxc.utopiatts.fragments.FragmentAbout"
-        android:label="@string/app_name"
-        tools:layout="@layout/fragment_about" />
+        android:label="@string/app_name" />
 </navigation>

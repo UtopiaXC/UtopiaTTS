@@ -19,7 +19,7 @@
     <string name="rights" translatable="false">Copyright © 2022 UtopiaXC All Rights Reserved.</string>
 
     <string name="tips">提示</string>
-    <string name="tips_tts_driver">Azure SDK方式采用微软官方开发工具包，速度快，连接稳定，但是需要注册Azure账户（有每月50万字免费额度），并输入密钥。\n\nWebSocket方式采用微软TTS官网的网页演示Demo的WebSocket接口实现，速度慢，连接不稳定，且随时有不再可用的风险，但是不需要注册账户和生成密钥，十分不推荐。</string>
+    <string name="tips_tts_driver">Azure SDK方式采用微软官方开发工具包，速度快，连接稳定，但是需要注册Azure账户（有每月50万字免费额度），并输入密钥。\n\nWebSocket方式采用微软TTS官网的网页演示Demo的WebSocket接口实现，速度慢，连接不稳定，且随时有不再可用的风险，但是不需要注册账户和生成密钥，十分不推荐。\n\n\当前WebSocket方式仍在开发中，如果不希望注册Azure免费账户，可使用ag2s20150909大佬的TTS，而这也是本项目的创作灵感。</string>
     <string name="confirm">确认</string>
     <string name="tts_driver_title">TTS引擎驱动方式</string>
     <string name="tts_driver_title_sdk">Azure SDK</string>
@@ -36,4 +36,20 @@
     <string name="region_not_support_pre">当前所选地区不支持预览版语音，请先选择支持的区域。目前支持预览版的可用区为：美国东部、西欧和东南亚</string>
     <string name="actor_is_pre">您当前选中的语音演员为预览版，您需要选择支持预览版的地区，或先切换成非预览版的语音演员。</string>
     <string name="voice_style">声音风格</string>
+    <string name="version">版本</string>
+    <string name="change_log">更新日志</string>
+    <string name="licenses">开源许可证</string>
+    <string name="author">作者</string>
+    <string name="follow_on_github">在GitHub上关注</string>
+    <string name="feedback_by_email">通过邮件反馈</string>
+    <string name="feedback_subject">UtopiaTTS的反馈</string>
+    <string name="clear_all_profiles">清空保存的配置</string>
+    <string name="cancel">取消</string>
+    <string name="clear_all_profiles_confirm">确认清空全部保存的配置？</string>
+    <string name="settings">设置</string>
+    <string name="change_log_title">更新日志</string>
+    <string name="tutorials">教程</string>
+    <string name="sorry">抱歉</string>
+    <string name="tutorials_is_not_ready">教程还未编写完成。</string>
+    <string name="tips_azure_token">此处输入从微软Azure中获取的TTS服务密钥，如果不理解，可以点击教程前往了解。</string>
 </resources>

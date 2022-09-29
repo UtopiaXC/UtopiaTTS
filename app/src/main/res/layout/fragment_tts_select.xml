@@ -12,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
+        android:textSize="22sp"
         android:text="@string/tts_driver_title"
         app:layout_constraintBottom_toTopOf="@+id/tts_from_group"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +35,7 @@
             android:id="@+id/tts_from_sdk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
             android:checked="true"
             android:text="@string/tts_driver_title_sdk" />
 
@@ -41,6 +43,7 @@
             android:id="@+id/tts_from_websocket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
             android:enabled="false"
             android:text="@string/tts_driver_title_ws" />
     </RadioGroup>

@@ -35,4 +35,26 @@
     <string name="region_not_support_pre">The region you set is not support preview actor, please change region first.Now, the support region are East US, West Europe and Southeast Asia</string>
     <string name="actor_is_pre">The voice actor you set is preview, you should only select region which is supported preview.</string>
     <string name="voice_style">Voice Style</string>
+    <string name="version">Version</string>
+    <string name="change_log">Change Log</string>
+    <string name="licenses">License</string>
+    <string name="author">Author</string>
+    <string name="author_name" translatable="false">UtopiaXC</string>
+    <string name="follow_on_github">Follow on GitHub</string>
+    <string name="feedback_by_email">Feedback by email</string>
+    <string name="github_link" translatable="false">https://github.com/UtopiaXC/UtopiaTTS</string>
+    <string name="user_email" translatable="false">utopiaxc@utopiaxc.com</string>
+    <string name="feedback_subject">Feedback for UtopiaTTS</string>
+    <string name="clear_all_profiles">Clear all profiles</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear_all_profiles_confirm">Confirm to clear all profiles?</string>
+    <string name="settings">Settings</string>
+    <string name="change_log_title">Change log(Please wait for GitHub)</string>
+    <string name="github_release_link" translatable="false">https://github.com/UtopiaXC/UtopiaTTS</string>
+    <string name="ag2s20150909_tts" translatable="false">https://github.com/ag2s20150909/TTS</string>
+    <string name="ag2s20150909_tts_title" translatable="false">ag2s20150909 TTS</string>
+    <string name="tutorials">Tutorials</string>
+    <string name="sorry">Sorry</string>
+    <string name="tutorials_is_not_ready">Tutorials is not ready.</string>
+    <string name="tips_azure_token">Input the token you get from azure, you can tap tutorials button to learn.</string>
 </resources>

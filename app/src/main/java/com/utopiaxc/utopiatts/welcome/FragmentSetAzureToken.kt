@@ -62,6 +62,22 @@ class FragmentSetAzureToken(private var mContext: IntroActivity) : Fragment(), S
             mBinding.buttonSetAzureToken.text=getString(R.string.checking)
             Thread(CheckToken(token,region)).start()
         }
+        mBinding.buttonAzureTokenHelp.setOnClickListener {
+            AlertDialog.Builder(this.activity).setTitle(R.string.tips)
+                .setMessage(R.string.tips_azure_token)
+                .setPositiveButton(R.string.confirm, null)
+                .setNegativeButton(R.string.tutorials) { _, _ ->
+                    run {
+                        AlertDialog.Builder(this.activity).setTitle(R.string.sorry)
+                            .setMessage(R.string.tutorials_is_not_ready)
+                            .setPositiveButton(R.string.confirm, null)
+                            .create()
+                            .show()
+                    }
+                }
+                .create()
+                .show()
+        }
         return mBinding.root
     }
 
