@@ -179,4 +179,96 @@
         <item>NARRATION_RELAXED</item>
         <item>DOCUMENTARY_NARRATION</item>
     </string-array>
+
+    <string-array name="tts_output_format_entries">
+        <item>AUDIO_16K_HZ_128K_BIT_RATE_MONO_MP3 *</item>
+        <item>AUDIO_16K_HZ_16_BIT_32KBPS_MONO_OPUS *</item>
+        <item>AUDIO_16K_HZ_16KBPS_MONO_SIREN</item>
+        <item>AUDIO_16K_HZ_32K_BIT_RATE_MONO_MP3 *</item>
+        <item>AUDIO_16K_HZ_64K_BIT_RATE_MONO_MP3 *</item>
+        <item>AUDIO_24K_HZ_160K_BIT_RATE_MONO_MP3 *</item>
+        <item>AUDIO_24K_HZ_16_BIT_24KBPS_MONO_OPUS *</item>
+        <item>AUDIO_24K_HZ_16_BIT_48KBPS_MONO_OPUS *</item>
+        <item>AUDIO_24K_HZ_48K_BIT_RATE_MONO_MP3 *</item>
+        <item>AUDIO_24K_HZ_96K_BIT_RATE_MONO_MP3 *</item>
+        <item>AUDIO_48K_HZ_192K_BIT_RATE_MONO_MP3 *</item>
+        <item>AUDIO_48K_HZ_96K_BIT_RATE_MONO_MP3 *</item>
+        <item>OGG_16K_HZ_16_BIT_MONO_OPUS *</item>
+        <item>OGG_24K_HZ_16_BIT_MONO_OPUS *</item>
+        <item>OGG_48K_HZ_16_BIT_MONO_OPUS * (Default)</item>
+        <item>RAW_16K_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_16K_HZ_16_BIT_MONO_TRUE_SILK</item>
+        <item>RAW_22050_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_24K_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_24K_HZ_16_BIT_MONO_TRUE_SILK</item>
+        <item>RAW_44100_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_48K_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_8K_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_8K_HZ_8_BIT_MONO_ALAW</item>
+        <item>RAW_8K_HZ_8_BIT_MONO_MULAW</item>
+        <item>RIFF_16K_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_16K_HZ_16KBPS_MONO_SIREN</item>
+        <item>RIFF_22050_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_24K_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_44100_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_48K_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_8K_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_8K_HZ_8_BIT_MONO_ALAW</item>
+        <item>RIFF_8K_HZ_8_BIT_MONO_MULAW</item>
+        <item>WEBM_16K_HZ_16_BIT_MONO_OPUS *</item>
+        <item>WEBM_24K_HZ_16_BIT_24KBPS_MONO_OPUS *</item>
+        <item>WEBM_24K_HZ_16_BIT_MONO_OPUS *</item>
+    </string-array>
+
+    <string-array name="tts_output_format_values">
+        <item>AUDIO_16K_HZ_128K_BIT_RATE_MONO_MP3</item>
+        <item>AUDIO_16K_HZ_16_BIT_32KBPS_MONO_OPUS</item>
+        <item>AUDIO_16K_HZ_16KBPS_MONO_SIREN</item>
+        <item>AUDIO_16K_HZ_32K_BIT_RATE_MONO_MP3</item>
+        <item>AUDIO_16K_HZ_64K_BIT_RATE_MONO_MP3</item>
+        <item>AUDIO_24K_HZ_160K_BIT_RATE_MONO_MP3</item>
+        <item>AUDIO_24K_HZ_16_BIT_24KBPS_MONO_OPUS</item>
+        <item>AUDIO_24K_HZ_16_BIT_48KBPS_MONO_OPUS</item>
+        <item>AUDIO_24K_HZ_48K_BIT_RATE_MONO_MP3</item>
+        <item>AUDIO_24K_HZ_96K_BIT_RATE_MONO_MP3</item>
+        <item>AUDIO_48K_HZ_192K_BIT_RATE_MONO_MP3</item>
+        <item>AUDIO_48K_HZ_96K_BIT_RATE_MONO_MP3</item>
+        <item>OGG_16K_HZ_16_BIT_MONO_OPUS</item>
+        <item>OGG_24K_HZ_16_BIT_MONO_OPUS</item>
+        <item>OGG_48K_HZ_16_BIT_MONO_OPUS</item>
+        <item>RAW_16K_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_16K_HZ_16_BIT_MONO_TRUE_SILK</item>
+        <item>RAW_22050_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_24K_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_24K_HZ_16_BIT_MONO_TRUE_SILK</item>
+        <item>RAW_44100_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_48K_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_8K_HZ_16_BIT_MONO_PCM</item>
+        <item>RAW_8K_HZ_8_BIT_MONO_ALAW</item>
+        <item>RAW_8K_HZ_8_BIT_MONO_MULAW</item>
+        <item>RIFF_16K_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_16K_HZ_16KBPS_MONO_SIREN</item>
+        <item>RIFF_22050_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_24K_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_44100_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_48K_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_8K_HZ_16_BIT_MONO_PCM</item>
+        <item>RIFF_8K_HZ_8_BIT_MONO_ALAW</item>
+        <item>RIFF_8K_HZ_8_BIT_MONO_MULAW</item>
+        <item>WEBM_16K_HZ_16_BIT_MONO_OPUS</item>
+        <item>WEBM_24K_HZ_16_BIT_24KBPS_MONO_OPUS</item>
+        <item>WEBM_24K_HZ_16_BIT_MONO_OPUS</item>
+    </string-array>
+
+
+
+    <string-array name="tts_driver_entries">
+        <item>Azure SDK Token</item>
+        <item>Demo WebSocket</item>
+    </string-array>
+
+    <string-array name="tts_driver_values">
+        <item>azure_sdk</item>
+        <item>websocket</item>
+    </string-array>
 </resources>

@@ -1,6 +1,7 @@
 package com.utopiaxc.utopiatts.enums;
 
 import com.utopiaxc.utopiatts.tts.enums.Driver;
+import com.utopiaxc.utopiatts.tts.enums.OutputFormat;
 
 public enum SettingsEnum {
 
@@ -8,7 +9,7 @@ public enum SettingsEnum {
     FIRST_BOOT("FIRST_BOOT", "first_boot", true),
     AZURE_REGION("AZURE_REGION", "azure_region", ""),
     AZURE_TOKEN("AZURE_TOKEN", "azure_token", "NULL"),
-    OUTPUT_FORMAT("OUTPUT_FORMAT", "output_format", ""),
+    OUTPUT_FORMAT("OUTPUT_FORMAT", "output_format", OutputFormat.OGG_48K_HZ_16_BIT_MONO_OPUS.getName()),
     ACTOR("ACTOR", "actor", ""),
     ROLE("ROLE", "role", ""),
     STYLE("STYLE", "style", ""),

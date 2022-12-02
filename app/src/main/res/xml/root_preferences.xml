@@ -3,6 +3,13 @@
 
     <PreferenceCategory app:title="@string/azure_settings">
 
+        <ListPreference
+            app:entries="@array/tts_driver_entries"
+            app:entryValues="@array/tts_driver_values"
+            app:key="tts_driver"
+            app:title="@string/tts_driver_title"
+            app:useSimpleSummaryProvider="true" />
+
         <EditTextPreference
             app:key="azure_token"
             app:singleLineTitle="true"
@@ -33,6 +40,13 @@
             android:entryValues="@array/tts_style_values"
             android:key="style"
             android:title="@string/voice_style"
+            app:useSimpleSummaryProvider="true"/>
+
+        <ListPreference
+            android:entries="@array/tts_output_format_entries"
+            android:entryValues="@array/tts_output_format_values"
+            android:key="output_format"
+            android:title="@string/output_format"
             app:useSimpleSummaryProvider="true"/>
     </PreferenceCategory>
 

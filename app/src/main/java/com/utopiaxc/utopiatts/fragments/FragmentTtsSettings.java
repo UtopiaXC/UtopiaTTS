@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
@@ -96,6 +97,30 @@ public class FragmentTtsSettings extends PreferenceFragmentCompat {
                 }
                 return false;
             }
+            return true;
+        });
+
+        ListPreference listFormat = findPreference(SettingsEnum.OUTPUT_FORMAT.getKey());
+        assert listFormat != null;
+        listFormat.setOnPreferenceChangeListener((preference, newValue) -> {
+            new AlertDialog.Builder(requireActivity()).setTitle(R.string.warning)
+                    .setMessage(R.string.warning_of_output_format)
+                    .setPositiveButton(R.string.confirm, null)
+                    .create()
+                    .show();
+            return true;
+        });
+
+        EditTextPreference editTextPreferenceToken = findPreference(SettingsEnum.AZURE_TOKEN.getKey());
+        assert editTextPreferenceToken != null;
+        editTextPreferenceToken.setEnabled(Driver.AZURE_SDK.getId().equals(
+                sharedPreferences.getString(SettingsEnum.TTS_DRIVER.getKey(),
+                String.valueOf(SettingsEnum.TTS_DRIVER.getDefaultValue()))));
+
+        ListPreference listDriver = findPreference(SettingsEnum.TTS_DRIVER.getKey());
+        assert listDriver != null;
+        listDriver.setOnPreferenceChangeListener((preference, newValue) -> {
+            editTextPreferenceToken.setEnabled(Driver.AZURE_SDK.getId().equals(newValue));
             return true;
         });
     }

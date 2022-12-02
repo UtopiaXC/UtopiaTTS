@@ -22,7 +22,7 @@
 
     <string name="tts_driver_title">TTS engine driven approach</string>
     <string name="tts_driver_title_sdk">Azure SDK</string>
-    <string name="tts_driver_title_ws">WebSocket</string>
+    <string name="tts_driver_title_ws">Demo WebSocket</string>
     <string name="warning">Warning</string>
     <string name="warning_blank_token">Please input the token.</string>
     <string name="warning_azure_token_not_checked">Your azure config is not checked. Please tap confirm first.</string>
@@ -57,4 +57,6 @@
     <string name="sorry">Sorry</string>
     <string name="tutorials_is_not_ready">Tutorials is not ready.</string>
     <string name="tips_azure_token">Input the token you get from azure, you can tap tutorials button to learn.</string>
+    <string name="output_format">Voice Output Format</string>
+    <string name="warning_of_output_format">"Please don't change it if the voice is not stuttering because some format have problems during websocket request. If you want to change it, please use the format with '*' because they are encoded format witch maybe mach stable."</string>
 </resources>

@@ -23,7 +23,7 @@
     <string name="confirm">确认</string>
     <string name="tts_driver_title">TTS引擎驱动方式</string>
     <string name="tts_driver_title_sdk">Azure SDK</string>
-    <string name="tts_driver_title_ws">WebSocket</string>
+    <string name="tts_driver_title_ws">Demo WebSocket</string>
     <string name="warning">警告</string>
     <string name="warning_blank_token">请输入Azure TTS服务密钥。</string>
     <string name="warning_azure_token_not_checked">您的Azure信息未经检查，请先点击确认进行检查。</string>
@@ -52,4 +52,6 @@
     <string name="sorry">抱歉</string>
     <string name="tutorials_is_not_ready">教程还未编写完成。</string>
     <string name="tips_azure_token">此处输入从微软Azure中获取的TTS服务密钥，如果不理解，可以点击教程前往了解。</string>
+    <string name="output_format">音频流格式</string>
+    <string name="warning_of_output_format">"如果您的语音不卡顿，请不要修改本项，因为部分语音在WebSocket模式下存在部分无法解决的问题以加剧卡顿。\n如果需要修改，请首选带'*'的格式，因为它们是需要进行解码的格式，因此可能更加稳定。"</string>
 </resources>

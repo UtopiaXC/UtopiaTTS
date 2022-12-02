@@ -180,6 +180,16 @@ public class CommonTool {
         return sdf.format(date);
     }
 
+    /**
+     * 获取时间戳
+     *
+     * @return String time
+     */
+    public static String getTime(long timestamp) {
+        Date date = new Date(timestamp);
+        return sdf.format(date);
+    }
+
 
     public static String localeToEmoji(Locale locale) {
         String countryCode = locale.getCountry();

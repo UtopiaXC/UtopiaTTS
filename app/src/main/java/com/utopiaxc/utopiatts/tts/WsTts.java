@@ -4,15 +4,11 @@ import static com.utopiaxc.utopiatts.tts.utils.CommonTool.getTime;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.AudioFormat;
 import android.media.MediaCodec;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
-import android.os.Build;
 import android.os.SystemClock;
 import android.speech.tts.SynthesisCallback;
-import android.speech.tts.SynthesisRequest;
-import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -37,7 +33,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Objects;
@@ -63,6 +58,7 @@ public class WsTts implements Tts {
     private final Buffer mData = new Buffer();
     private MediaCodec mMediaCodec;
     private String mOldMime;
+    private Ssml mSsml;
     private SynthesisCallback mCallback;
     private final WebSocketListener mWebSocketListener = new WebSocketListener() {
         @Override
@@ -87,16 +83,13 @@ public class WsTts implements Tts {
             super.onFailure(webSocket, t, response);
             mWebSocket = null;
             mWebSocketState = WebSocketState.OFFLINE;
-            Log.e(TAG, "onFailure" + t.getMessage(), t);
-            if (mIsSynthesizing) {
-                mWebSocket = getOrCreateWs();
-            }
+            Log.e(TAG, "onFailure, throwable = \n",t);
+            getOrCreateWs().send(mSsml.toStringForWs());
         }
 
         @Override
         public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
             super.onMessage(webSocket, text);
-            //Log.v(TAG, "onMessage" + text);
             final String endTag = "turn.end";
             final String startTag = "turn.start";
             int endIndex = text.lastIndexOf(endTag);
@@ -121,15 +114,12 @@ public class WsTts implements Tts {
             final String audioTag = "Path:audio\r\n";
             final String startTag = "Content-Type:";
             final String endTag = "\r\nX-StreamId";
-
             int audioIndex = bytes.lastIndexOf(audioTag.getBytes(StandardCharsets.UTF_8)) + audioTag.length();
             int startIndex = bytes.lastIndexOf(startTag.getBytes(StandardCharsets.UTF_8)) + startTag.length();
             int endIndex = bytes.lastIndexOf(endTag.getBytes(StandardCharsets.UTF_8));
             if (audioIndex != -1) {
-
                 try {
                     String temp = bytes.substring(startIndex, endIndex).utf8();
-                    Log.v(TAG, "当前Mime:" + temp);
                     String mCurrentMime;
                     if (temp.startsWith("audio")) {
                         mCurrentMime = temp;
@@ -139,12 +129,10 @@ public class WsTts implements Tts {
                     if (!mOutputFormat.needDecode()) {
                         if ("audio/x-wav".equals(mCurrentMime) && bytes.lastIndexOf("RIFF".getBytes(StandardCharsets.UTF_8)) != -1) {
                             audioIndex += 44;
-                            Log.v(TAG, "移除WAV文件头");
                         }
                     }
                     mData.write(bytes.substring(audioIndex));
                 } catch (Exception e) {
-                    Log.e(TAG, "onMessage Error:", e);
                     mIsSynthesizing = false;
                 }
             }
@@ -199,12 +187,17 @@ public class WsTts implements Tts {
             }
         }
         mIsSynthesizing = false;
-        return false;
+        return true;
     }
 
     @Override
     public void stopSpeak() {
-
+        if (mWebSocket != null) {
+            Objects.requireNonNull(mWebSocket).close(1000, "closed by call onStop");
+            mWebSocket = null;
+        }
+        mIsSynthesizing = false;
+        mData.clear();
     }
 
     @Override
@@ -237,24 +230,41 @@ public class WsTts implements Tts {
         int styleDegree = mSharedPreferences.getInt(SettingsEnum.STYLE_DEGREE.getKey(),
                 (Integer) SettingsEnum.STYLE_DEGREE.getDefaultValue());
 
-        Ssml ssml = new Ssml(text, actor.getId(), pitch,
+        mSsml = new Ssml(text, actor.getId(), pitch,
                 rate, role.getId(), style.getId(), styleDegree);
 
-        try {
-            boolean success = getOrCreateWs().send(ssml.toStringForWs());
-            if (!success && mIsSynthesizing) {
-                getOrCreateWs().send(ssml.toStringForWs());
-            }
-        } catch (Exception e) {
-            getOrCreateWs();
-            while (mWebSocket == null) {
+        while (mIsSynthesizing){
+            Log.w(TAG,"try sendText");
+            try {
+                if (getOrCreateWs().send(mSsml.toStringForWs())){
+                    break;
+                }
+            }catch (Exception e){
                 try {
                     this.wait(500);
                 } catch (Exception ignored) {
                 }
+                Log.w(TAG,"Retry sendText");
             }
-            getOrCreateWs().send(ssml.toStringForWs());
         }
+//        try {
+//            while(!(getOrCreateWs().send(ssml.toStringForWs()))&&mIsSynthesizing){
+//                Log.w(TAG,"Retry sendText");
+//            }
+//            boolean success = getOrCreateWs().send(ssml.toStringForWs());
+//            if (!success && mIsSynthesizing) {
+//                getOrCreateWs().send(ssml.toStringForWs());
+//            }
+//        } catch (Exception e) {
+//            getOrCreateWs();
+//            while (mWebSocket == null) {
+//                try {
+//                    this.wait(500);
+//                } catch (Exception ignored) {
+//                }
+//            }
+//            getOrCreateWs().send(ssml.toStringForWs());
+//        }
     }
 
     private synchronized void sendConfig(@NonNull WebSocket ws) {
@@ -265,7 +275,7 @@ public class WsTts implements Tts {
                 "{\"synthesis\":" +
                 "{\"audio\":" +
                 "{\"metadataoptions\":" +
-                "{\"sentenceBoundaryEnabled\":\"false\",\"wordBoundaryEnabled\":\"true\"" +
+                "{\"sentenceBoundaryEnabled\":\"true\",\"wordBoundaryEnabled\":\"true\"" +
                 "},\"outputFormat\":\"" + mOutputFormat.getValue() + "\"}}}}";
         ws.send(msg);
     }
@@ -387,7 +397,6 @@ public class WsTts implements Tts {
     private synchronized void doUnDecode(@NonNull ByteString data) {
         mIsSynthesizing = true;
         int length = data.toByteArray().length;
-        //最大BufferSize
         final int maxBufferSize = mCallback.getMaxBufferSize();
         int offset = 0;
         while (offset < length && mIsSynthesizing) {

@@ -247,6 +247,6 @@ public enum OutputFormat {
                 return outputFormat;
             }
         }
-        return RAW_48K_HZ_16_BIT_MONO_PCM;
+        return OGG_48K_HZ_16_BIT_MONO_OPUS;
     }
 }
