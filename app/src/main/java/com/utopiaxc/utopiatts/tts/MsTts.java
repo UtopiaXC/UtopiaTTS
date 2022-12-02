@@ -2,6 +2,7 @@ package com.utopiaxc.utopiatts.tts;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.speech.tts.SynthesisCallback;
 import android.util.Log;
 
 import androidx.preference.PreferenceManager;
@@ -46,7 +47,7 @@ public class MsTts implements Tts{
     }
 
     @Override
-    public boolean doSpeak(String text, int pitch, int rate) {
+    public boolean doSpeak(String text, int pitch, int rate, SynthesisCallback synthesisCallback) {
         Actors actor = Actors.getActor(
                 mSharedPreferences.getString(SettingsEnum.ACTOR.getKey(),
                         (String) SettingsEnum.ACTOR.getDefaultValue()));

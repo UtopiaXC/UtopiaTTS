@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
+import com.github.appintro.SlidePolicy
+import com.utopiaxc.utopiatts.MainActivity
 import com.utopiaxc.utopiatts.R
 import com.utopiaxc.utopiatts.databinding.FragmentTtsSelectBinding
 import com.utopiaxc.utopiatts.enums.SettingsEnum
@@ -17,13 +19,15 @@ import com.utopiaxc.utopiatts.tts.enums.Driver
 import com.utopiaxc.utopiatts.utils.ThemeUtil
 
 
-class FragmentTtsSelect(private var mContext: IntroActivity) : Fragment() {
+class FragmentTtsSelect(private var mContext: IntroActivity) : Fragment(), SlidePolicy {
     private val TAG = "FragmentTtsSelect"
+    private var mIsChecked = true
     private lateinit var mBinding: FragmentTtsSelectBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = FragmentTtsSelectBinding.inflate(layoutInflater)
+
     }
 
     override fun onCreateView(
@@ -61,13 +65,26 @@ class FragmentTtsSelect(private var mContext: IntroActivity) : Fragment() {
             Log.d(TAG, "ttsFromSdk clicked")
             editor.putString(SettingsEnum.TTS_DRIVER.key, Driver.AZURE_SDK.id)
             editor.apply()
+            mIsChecked=true
         }
         mBinding.ttsFromWebsocket.setOnClickListener {
             Log.d(TAG, "ttsFromWebsocket clicked")
             editor.putString(SettingsEnum.TTS_DRIVER.key, Driver.WEBSOCKET.id)
             editor.apply()
+            mIsChecked=false
         }
         return mBinding.root
+    }
+
+    override val isPolicyRespected: Boolean
+        get() = mIsChecked
+
+    override fun onUserIllegallyRequestedNextPage() {
+        val editor = PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+        editor.putBoolean(SettingsEnum.FIRST_BOOT.key, false)
+        editor.apply()
+        mContext.startActivity(Intent(mContext, MainActivity::class.java))
+        mContext.finish()
     }
 
     companion object {

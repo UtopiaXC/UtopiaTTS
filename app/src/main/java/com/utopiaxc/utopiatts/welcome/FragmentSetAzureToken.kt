@@ -2,10 +2,12 @@ package com.utopiaxc.utopiatts.welcome
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.res.Resources.Theme
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,31 +26,32 @@ import com.utopiaxc.utopiatts.utils.ThemeUtil
 class FragmentSetAzureToken(private var mContext: IntroActivity) : Fragment(), SlidePolicy {
     private val TAG = "FragmentSetAzureToken"
     private lateinit var mBinding: FragmentSetAzureTokenBinding
-    private var mIsChecked=false
-    private lateinit var mFragmentSetAzureTokenHandler : FragmentSetAzureTokenHandler
+    private var mIsChecked = false
+    private lateinit var mFragmentSetAzureTokenHandler: FragmentSetAzureTokenHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = FragmentSetAzureTokenBinding.inflate(layoutInflater)
-        mFragmentSetAzureTokenHandler=FragmentSetAzureTokenHandler(mContext.mainLooper)
+        mFragmentSetAzureTokenHandler = FragmentSetAzureTokenHandler(mContext.mainLooper)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        if (ThemeUtil.isNightMode(mContext)){
-            mBinding.root.setBackgroundColor( mContext.getColor(R.color.welcome_bg_night))
-        }else{
-            mBinding.root.setBackgroundColor( mContext.getColor(R.color.welcome_bg_day))
+        Log.d(TAG, "onCreateView")
+        if (ThemeUtil.isNightMode(mContext)) {
+            mBinding.root.setBackgroundColor(mContext.getColor(R.color.welcome_bg_night))
+        } else {
+            mBinding.root.setBackgroundColor(mContext.getColor(R.color.welcome_bg_day))
         }
 
-        mBinding.buttonSetAzureToken.setOnClickListener{
+        mBinding.buttonSetAzureToken.setOnClickListener {
             val imm: InputMethodManager = requireView().context
                 .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(requireView().windowToken, 0)
-            val token=mBinding.editTextAzureToken.text.toString()
-            if (token== ""){
+            val token = mBinding.editTextAzureToken.text.toString()
+            if (token == "") {
                 AlertDialog.Builder(this.activity).setTitle(R.string.warning)
                     .setMessage(R.string.warning_blank_token)
                     .setPositiveButton(R.string.confirm, null)
@@ -56,11 +59,13 @@ class FragmentSetAzureToken(private var mContext: IntroActivity) : Fragment(), S
                     .show()
                 return@setOnClickListener
             }
-            val region = Regions.getRegion(resources.getStringArray(R.array.azure_region_values)
-                    [mBinding.spinnerAzureRegion.selectedItemId.toInt()]).id
-            mBinding.buttonSetAzureToken.isEnabled=false
-            mBinding.buttonSetAzureToken.text=getString(R.string.checking)
-            Thread(CheckToken(token,region)).start()
+            val region = Regions.getRegion(
+                resources.getStringArray(R.array.azure_region_values)
+                        [mBinding.spinnerAzureRegion.selectedItemId.toInt()]
+            ).id
+            mBinding.buttonSetAzureToken.isEnabled = false
+            mBinding.buttonSetAzureToken.text = getString(R.string.checking)
+            Thread(CheckToken(token, region)).start()
         }
         mBinding.buttonAzureTokenHelp.setOnClickListener {
             AlertDialog.Builder(this.activity).setTitle(R.string.tips)
@@ -99,50 +104,55 @@ class FragmentSetAzureToken(private var mContext: IntroActivity) : Fragment(), S
             .show()
     }
 
-    private inner class CheckToken(var token: String, var region: String) : Runnable{
+    private inner class CheckToken(var token: String, var region: String) : Runnable {
 
         override fun run() {
-            if (MsTts.testAzureConfig(token,region)){
-                val message=Message()
-                message.what=mFragmentSetAzureTokenHandler.CHECK_TOKEN_SUCCESS
-                val bundle=Bundle()
-                bundle.putString(SettingsEnum.AZURE_TOKEN.key,token)
-                bundle.putString(SettingsEnum.AZURE_REGION.key,Regions.getRegion(region).getName())
-                message.data=bundle
+            if (MsTts.testAzureConfig(token, region)) {
+                val message = Message()
+                message.what = mFragmentSetAzureTokenHandler.CHECK_TOKEN_SUCCESS
+                val bundle = Bundle()
+                bundle.putString(SettingsEnum.AZURE_TOKEN.key, token)
+                bundle.putString(SettingsEnum.AZURE_REGION.key, Regions.getRegion(region).getName())
+                message.data = bundle
                 mFragmentSetAzureTokenHandler.sendMessage(message)
-            }else{
+            } else {
                 mFragmentSetAzureTokenHandler.sendEmptyMessage(
-                    mFragmentSetAzureTokenHandler.CHECK_TOKEN_ERROR)
+                    mFragmentSetAzureTokenHandler.CHECK_TOKEN_ERROR
+                )
             }
         }
     }
 
-    private inner class FragmentSetAzureTokenHandler(looper: Looper) : Handler(looper){
-        val CHECK_TOKEN_SUCCESS=0x01
-        val CHECK_TOKEN_ERROR=0x02
+    private inner class FragmentSetAzureTokenHandler(looper: Looper) : Handler(looper) {
+        val CHECK_TOKEN_SUCCESS = 0x01
+        val CHECK_TOKEN_ERROR = 0x02
 
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
-            when(msg.what){
-                CHECK_TOKEN_SUCCESS->{
-                    val bundle=msg.data
-                    mBinding.buttonSetAzureToken.isEnabled=true
-                    mBinding.buttonSetAzureToken.text=getString(R.string.success)
+            when (msg.what) {
+                CHECK_TOKEN_SUCCESS -> {
+                    val bundle = msg.data
+                    mBinding.buttonSetAzureToken.isEnabled = true
+                    mBinding.buttonSetAzureToken.text = getString(R.string.success)
                     mBinding.buttonSetAzureToken
                         .setBackgroundColor(resources.getColor(R.color.success))
-                    val editor= PreferenceManager.getDefaultSharedPreferences(mContext).edit()
-                    editor.putString(SettingsEnum.AZURE_TOKEN.key,bundle
-                        .getString(SettingsEnum.AZURE_TOKEN.key))
-                    editor.putString(SettingsEnum.AZURE_REGION.key,bundle
-                        .getString(SettingsEnum.AZURE_REGION.key))
+                    val editor = PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+                    editor.putString(
+                        SettingsEnum.AZURE_TOKEN.key, bundle
+                            .getString(SettingsEnum.AZURE_TOKEN.key)
+                    )
+                    editor.putString(
+                        SettingsEnum.AZURE_REGION.key, bundle
+                            .getString(SettingsEnum.AZURE_REGION.key)
+                    )
                     editor.apply()
-                    mIsChecked=true
+                    mIsChecked = true
                 }
-                CHECK_TOKEN_ERROR->{
-                    mBinding.buttonSetAzureToken.isEnabled=true
+                CHECK_TOKEN_ERROR -> {
+                    mBinding.buttonSetAzureToken.isEnabled = true
                     mBinding.buttonSetAzureToken
                         .setBackgroundColor(resources.getColor(R.color.warning))
-                    mBinding.buttonSetAzureToken.text=getString(R.string.error)
+                    mBinding.buttonSetAzureToken.text = getString(R.string.error)
                     AlertDialog.Builder(mContext).setTitle(R.string.error)
                         .setMessage(R.string.error_azure_token)
                         .setPositiveButton(R.string.confirm, null)

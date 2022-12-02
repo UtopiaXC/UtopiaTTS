@@ -22,7 +22,7 @@
 
     <string name="tts_driver_title">TTS engine driven approach</string>
     <string name="tts_driver_title_sdk">Azure SDK</string>
-    <string name="tts_driver_title_ws">WebSocket（Developing）</string>
+    <string name="tts_driver_title_ws">WebSocket</string>
     <string name="warning">Warning</string>
     <string name="warning_blank_token">Please input the token.</string>
     <string name="warning_azure_token_not_checked">Your azure config is not checked. Please tap confirm first.</string>

@@ -116,11 +116,9 @@ public class UtopiaTtsService extends TextToSpeechService {
         synthesisCallback.start(outputFormat.getSoundFrequency(),
                 outputFormat.getAudioFormat(), 1);
         if (mTts.doSpeak(synthesisRequest.getCharSequenceText().toString(),
-                synthesisRequest.getPitch(), synthesisRequest.getSpeechRate())) {
-
+                synthesisRequest.getPitch(), synthesisRequest.getSpeechRate(),synthesisCallback)) {
             synthesisCallback.done();
         } else {
-
             synthesisCallback.error();
         }
     }

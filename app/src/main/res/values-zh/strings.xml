@@ -19,11 +19,11 @@
     <string name="rights" translatable="false">Copyright © 2022 UtopiaXC All Rights Reserved.</string>
 
     <string name="tips">提示</string>
-    <string name="tips_tts_driver">Azure SDK方式采用微软官方开发工具包，速度快，连接稳定，但是需要注册Azure账户（有每月50万字免费额度），并输入密钥。\n\nWebSocket方式采用微软TTS官网的网页演示Demo的WebSocket接口实现，速度慢，连接不稳定，且随时有不再可用的风险，但是不需要注册账户和生成密钥，十分不推荐。\n\n\当前WebSocket方式仍在开发中，如果不希望注册Azure免费账户，可使用ag2s20150909大佬的TTS，而这也是本项目的创作灵感。</string>
+    <string name="tips_tts_driver">Azure SDK方式采用微软官方开发工具包，速度快，连接稳定，但是需要注册Azure账户（有每月50万字免费额度），并输入密钥。\n\nWebSocket方式采用微软TTS官网的网页演示Demo的WebSocket接口实现，不需要注册账户和生成密钥。\n\n\感谢ag2s20150909大佬为本项目的创作提供灵感。</string>
     <string name="confirm">确认</string>
     <string name="tts_driver_title">TTS引擎驱动方式</string>
     <string name="tts_driver_title_sdk">Azure SDK</string>
-    <string name="tts_driver_title_ws">WebSocket（开发中）</string>
+    <string name="tts_driver_title_ws">WebSocket</string>
     <string name="warning">警告</string>
     <string name="warning_blank_token">请输入Azure TTS服务密钥。</string>
     <string name="warning_azure_token_not_checked">您的Azure信息未经检查，请先点击确认进行检查。</string>

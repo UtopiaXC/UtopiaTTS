@@ -51,4 +51,35 @@ public class Ssml {
         Log.d(TAG, "toString = " + sb);
         return sb.toString();
     }
+
+    public String toStringForWs(){
+        StringBuilder sb = new StringBuilder()
+                .append("Path:ssml\r\n")
+                .append("X-RequestId:").append(CommonTool.getMD5String(mText + "" + System.currentTimeMillis()))
+                .append("\r\n")
+                .append("X-Timestamp:")
+                .append(CommonTool.getTime()).append("Z\r\n")
+                .append("Content-Type:application/ssml+xml\r\n\r\n");
+        sb.append("<speak xmlns=\"http://www.w3.org/2001/10/synthesis\" xmlns:mstts=\"http://www.w3.org/2001/mstts\" xmlns:emo=\"http://www.w3.org/2009/10/emotionml\" version=\"1.0\" xml:lang=\"en-US\">");
+        sb.append("<voice name=\"").append(mActor).append("\">");
+        if (!"".equals(mStyle)||!"".equals(mRole)) {
+            sb.append("<mstts:express-as ");
+            if (!"".equals(mRole)) {
+                sb.append("role=\"").append(mRole).append("\" ");
+            }
+            if (!"".equals(mStyle)) {
+                sb.append("style=\"").append(mStyle).append("\" styledegree=\"").append(mStyleDegree).append("\" ");
+            }
+            sb.append(">");
+        }
+        sb.append("<prosody rate=\"").append(mRate).append("%\" pitch=\"").append(mPitch).append("%\">");
+        sb.append(mText);
+        sb.append("</prosody>");
+        if (!"".equals(mStyle)) {
+            sb.append("</mstts:express-as>");
+        }
+        sb.append("</voice></speak>");
+        Log.d(TAG, "toString = " + sb);
+        return sb.toString();
+    }
 }
