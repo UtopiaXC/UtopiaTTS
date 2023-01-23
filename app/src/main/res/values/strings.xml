@@ -59,4 +59,5 @@
     <string name="tips_azure_token">Input the token you get from azure, you can tap tutorials button to learn.</string>
     <string name="output_format">Voice Output Format</string>
     <string name="warning_of_output_format">"Please don't change it if the voice is not stuttering because some format have problems during websocket request. If you want to change it, please use the format with '*' because they are encoded format witch maybe mach stable."</string>
+    <string name="tts_demo_text">This is an example of speech synthesis by Utopia TTS.</string>
 </resources>

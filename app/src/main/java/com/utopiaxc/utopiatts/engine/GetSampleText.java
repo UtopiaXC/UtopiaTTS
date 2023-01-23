@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
+import com.utopiaxc.utopiatts.R;
+
 import java.util.Locale;
 
 public class GetSampleText extends Activity {
@@ -24,7 +26,7 @@ public class GetSampleText extends Activity {
         String variant = i.getExtras().getString("variant");
         Log.i(TAG, language + "_" + country + "_" + variant);
         Locale locale = new Locale(language, country);
-        returnData.putExtra("sampleText", "这是一个语音合成的范例");
+        returnData.putExtra("sampleText", getText(R.string.tts_demo_text));
         setResult(result, returnData);
         finish();
     }

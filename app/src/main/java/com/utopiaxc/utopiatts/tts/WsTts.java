@@ -83,8 +83,12 @@ public class WsTts implements Tts {
             super.onFailure(webSocket, t, response);
             mWebSocket = null;
             mWebSocketState = WebSocketState.OFFLINE;
-            Log.e(TAG, "onFailure, throwable = \n",t);
-            getOrCreateWs().send(mSsml.toStringForWs());
+            Log.e(TAG, "onFailure, throwable = \n", t);
+            try {
+                getOrCreateWs().send(mSsml.toStringForWs());
+            } catch (NullPointerException exception) {
+                exception.printStackTrace();
+            }
         }
 
         @Override
@@ -162,8 +166,8 @@ public class WsTts implements Tts {
     }
 
     @Override
-    public boolean doSpeak(String text, int pitch, int rate,SynthesisCallback synthesisCallback) {
-        mCallback=synthesisCallback;
+    public boolean doSpeak(String text, int pitch, int rate, SynthesisCallback synthesisCallback) {
+        mCallback = synthesisCallback;
         mIsSynthesizing = true;
         if (CommonTool.isNoVoice(text)) {
             mIsSynthesizing = false;
@@ -203,6 +207,10 @@ public class WsTts implements Tts {
     @Override
     public void initTts() {
         Log.i(TAG, "initTts");
+        stopSpeak();
+        if (mCallback != null) {
+            mCallback.error();
+        }
         mRegions = Regions.getRegion(
                 mSharedPreferences.getString(
                         SettingsEnum.AZURE_REGION.getKey(),
@@ -233,38 +241,20 @@ public class WsTts implements Tts {
         mSsml = new Ssml(text, actor.getId(), pitch,
                 rate, role.getId(), style.getId(), styleDegree);
 
-        while (mIsSynthesizing){
-            Log.w(TAG,"try sendText");
+        while (mIsSynthesizing) {
+            Log.w(TAG, "try sendText");
             try {
-                if (getOrCreateWs().send(mSsml.toStringForWs())){
+                if (getOrCreateWs().send(mSsml.toStringForWs())) {
                     break;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 try {
                     this.wait(500);
                 } catch (Exception ignored) {
                 }
-                Log.w(TAG,"Retry sendText");
+                Log.w(TAG, "Retry sendText");
             }
         }
-//        try {
-//            while(!(getOrCreateWs().send(ssml.toStringForWs()))&&mIsSynthesizing){
-//                Log.w(TAG,"Retry sendText");
-//            }
-//            boolean success = getOrCreateWs().send(ssml.toStringForWs());
-//            if (!success && mIsSynthesizing) {
-//                getOrCreateWs().send(ssml.toStringForWs());
-//            }
-//        } catch (Exception e) {
-//            getOrCreateWs();
-//            while (mWebSocket == null) {
-//                try {
-//                    this.wait(500);
-//                } catch (Exception ignored) {
-//                }
-//            }
-//            getOrCreateWs().send(ssml.toStringForWs());
-//        }
     }
 
     private synchronized void sendConfig(@NonNull WebSocket ws) {
@@ -287,7 +277,8 @@ public class WsTts implements Tts {
             }
             String url;
             String origin;
-            url = "wss://" + mRegions.getId() + ".api.speech.microsoft.com/cognitiveservices/websocket/v1?TrafficType=AzureDemo&Authorization=bearer undefined&X-ConnectionId=" + CommonTool.getMD5String(new Date().toString());
+            url = Constants.WSS + mRegions.getId() + Constants.MS_API +
+                    CommonTool.getMD5String(new Date().toString());
             origin = "https://azure.microsoft.com";
             Request request = new Request.Builder()
                     .url(url)

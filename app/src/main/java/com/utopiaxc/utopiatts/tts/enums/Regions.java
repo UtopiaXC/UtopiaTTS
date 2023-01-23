@@ -55,7 +55,7 @@ public enum Regions {
                 return region;
             }
         }
-        return EAST_ASIA;
+        return SOUTH_EAST_ASIA;
     }
 
     public String getName() {

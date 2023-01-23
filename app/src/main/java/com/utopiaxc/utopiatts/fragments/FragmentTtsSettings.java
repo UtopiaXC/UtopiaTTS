@@ -69,8 +69,10 @@ public class FragmentTtsSettings extends PreferenceFragmentCompat {
         assert listActors != null;
         listActors.setOnPreferenceChangeListener((preference, newValue) -> {
             if (Actors.getActor((String) newValue).isPre()) {
-                if (Regions.getRegion(sharedPreferences.getString(SettingsEnum.AZURE_REGION.getKey(),
-                        String.valueOf(SettingsEnum.AZURE_REGION.getDefaultValue()))).isNotSupportPre()) {
+                if (Regions.getRegion(sharedPreferences.getString(SettingsEnum.AZURE_REGION
+                                        .getKey(),
+                                String.valueOf(SettingsEnum.AZURE_REGION.getDefaultValue())))
+                        .isNotSupportPre()) {
                     new AlertDialog.Builder(requireActivity()).setTitle(R.string.error)
                             .setMessage(R.string.region_not_support_pre)
                             .setPositiveButton(R.string.confirm, null)
@@ -111,11 +113,12 @@ public class FragmentTtsSettings extends PreferenceFragmentCompat {
             return true;
         });
 
-        EditTextPreference editTextPreferenceToken = findPreference(SettingsEnum.AZURE_TOKEN.getKey());
+        EditTextPreference editTextPreferenceToken = findPreference(
+                SettingsEnum.AZURE_TOKEN.getKey());
         assert editTextPreferenceToken != null;
         editTextPreferenceToken.setEnabled(Driver.AZURE_SDK.getId().equals(
                 sharedPreferences.getString(SettingsEnum.TTS_DRIVER.getKey(),
-                String.valueOf(SettingsEnum.TTS_DRIVER.getDefaultValue()))));
+                        String.valueOf(SettingsEnum.TTS_DRIVER.getDefaultValue()))));
 
         ListPreference listDriver = findPreference(SettingsEnum.TTS_DRIVER.getKey());
         assert listDriver != null;

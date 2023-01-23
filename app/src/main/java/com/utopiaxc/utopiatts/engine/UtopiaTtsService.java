@@ -24,6 +24,9 @@ import com.utopiaxc.utopiatts.tts.WsTts;
 import com.utopiaxc.utopiatts.tts.enums.Driver;
 import com.utopiaxc.utopiatts.tts.enums.OutputFormat;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class UtopiaTtsService extends TextToSpeechService {
@@ -96,7 +99,6 @@ public class UtopiaTtsService extends TextToSpeechService {
         mTts.stopSpeak();
     }
 
-    //disable audio format wrong
     @SuppressLint("WrongConstant")
     @Override
     protected void onSynthesizeText(SynthesisRequest synthesisRequest,
@@ -115,18 +117,40 @@ public class UtopiaTtsService extends TextToSpeechService {
                         (String) SettingsEnum.OUTPUT_FORMAT.getDefaultValue()));
         synthesisCallback.start(outputFormat.getSoundFrequency(),
                 outputFormat.getAudioFormat(), 1);
-        if (mTts.doSpeak(synthesisRequest.getCharSequenceText().toString(),
-                synthesisRequest.getPitch(), synthesisRequest.getSpeechRate(),synthesisCallback)) {
-            synthesisCallback.done();
-        } else {
-            synthesisCallback.error();
+        String textToSpeech = synthesisRequest.getCharSequenceText().toString();
+        List<String> text = new ArrayList<>();
+        StringBuilder textBuilder = new StringBuilder();
+
+        for (int i = 0; i < textToSpeech.length(); i++) {
+            char c = textToSpeech.charAt(i);
+            if (".。！!?？".contains(String.valueOf(c))) {
+                textBuilder.append(c);
+                if (textBuilder.length() >= 50) {
+                    text.add(textBuilder.toString());
+                    textBuilder.setLength(0);
+                }
+            } else {
+                textBuilder.append(c);
+            }
         }
+        text.add(textBuilder.toString());
+        for (String s : text) {
+            Log.i(TAG, s);
+            if (!mTts.doSpeak(s,
+                    synthesisRequest.getPitch(), synthesisRequest.getSpeechRate(),
+                    synthesisCallback)) {
+                synthesisCallback.error();
+                return;
+            }
+        }
+        synthesisCallback.done();
     }
 
     private void startForegroundService() {
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel(notificationChannelId, notificationName, NotificationManager.IMPORTANCE_LOW);
+            NotificationChannel notificationChannel = new NotificationChannel(notificationChannelId,
+                    notificationName, NotificationManager.IMPORTANCE_LOW);
             notificationManager.createNotificationChannel(notificationChannel);
 
         }
@@ -136,7 +160,8 @@ public class UtopiaTtsService extends TextToSpeechService {
     private Notification getNotification() {
         Intent stopSelf = new Intent(this, UtopiaTtsService.class);
         stopSelf.setAction(ACTION_STOP_SERVICE);
-        PendingIntent pStopSelf = PendingIntent.getService(this, 0, stopSelf, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pStopSelf = PendingIntent.getService(this, 0, stopSelf,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         notificationBuilder = new Notification.Builder(this)
                 .setOnlyAlertOnce(true)
                 .setVibrate(null)
