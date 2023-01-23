@@ -39,6 +39,7 @@ public class UtopiaTtsService extends TextToSpeechService {
     private static final int NOTIFICATION_ID = 1;
     private static final String ACTION_STOP_SERVICE = "action_stop_service";
     private Tts mTts;
+    private Thread mSynthesizeTextThread;
 
     @Override
     public void onCreate() {
@@ -58,6 +59,9 @@ public class UtopiaTtsService extends TextToSpeechService {
     public void onDestroy() {
         Log.i(TAG, "onDestroy");
         mTts.stopSpeak();
+        if (mSynthesizeTextThread != null) {
+            mSynthesizeTextThread.interrupt();
+        }
         super.onDestroy();
     }
 
@@ -97,6 +101,9 @@ public class UtopiaTtsService extends TextToSpeechService {
     protected void onStop() {
         Log.i(TAG, "onStop");
         mTts.stopSpeak();
+        if (mSynthesizeTextThread != null) {
+            mSynthesizeTextThread.interrupt();
+        }
     }
 
     @SuppressLint("WrongConstant")
@@ -117,33 +124,54 @@ public class UtopiaTtsService extends TextToSpeechService {
                         (String) SettingsEnum.OUTPUT_FORMAT.getDefaultValue()));
         synthesisCallback.start(outputFormat.getSoundFrequency(),
                 outputFormat.getAudioFormat(), 1);
-        String textToSpeech = synthesisRequest.getCharSequenceText().toString();
-        List<String> text = new ArrayList<>();
-        StringBuilder textBuilder = new StringBuilder();
+        mSynthesizeTextThread = new Thread(new SynthesizeText(synthesisRequest, synthesisCallback));
+        mSynthesizeTextThread.start();
+        try {
+            mSynthesizeTextThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-        for (int i = 0; i < textToSpeech.length(); i++) {
-            char c = textToSpeech.charAt(i);
-            if (".。！!?？".contains(String.valueOf(c))) {
-                textBuilder.append(c);
-                if (textBuilder.length() >= 50) {
-                    text.add(textBuilder.toString());
-                    textBuilder.setLength(0);
+    class SynthesizeText implements Runnable {
+        SynthesisRequest synthesisRequest;
+        SynthesisCallback synthesisCallback;
+
+        public SynthesizeText(SynthesisRequest synthesisRequest,
+                              SynthesisCallback synthesisCallback) {
+            this.synthesisRequest = synthesisRequest;
+            this.synthesisCallback = synthesisCallback;
+        }
+
+        @Override
+        public void run() {
+            String textToSpeech = synthesisRequest.getCharSequenceText().toString();
+            List<String> text = new ArrayList<>();
+            StringBuilder textBuilder = new StringBuilder();
+            for (int i = 0; i < textToSpeech.length(); i++) {
+                char c = textToSpeech.charAt(i);
+                if (".。！!?？".contains(String.valueOf(c))) {
+                    textBuilder.append(c);
+                    if (textBuilder.length() >= 50) {
+                        text.add(textBuilder.toString());
+                        textBuilder.setLength(0);
+                    }
+                } else {
+                    textBuilder.append(c);
                 }
-            } else {
-                textBuilder.append(c);
             }
-        }
-        text.add(textBuilder.toString());
-        for (String s : text) {
-            Log.i(TAG, s);
-            if (!mTts.doSpeak(s,
-                    synthesisRequest.getPitch(), synthesisRequest.getSpeechRate(),
-                    synthesisCallback)) {
-                synthesisCallback.error();
-                return;
+            text.add(textBuilder.toString());
+            for (String s : text) {
+                Log.i(TAG, s);
+                if (!mTts.doSpeak(s,
+                        synthesisRequest.getPitch(), synthesisRequest.getSpeechRate(),
+                        synthesisCallback)) {
+                    synthesisCallback.error();
+                    return;
+                }
             }
+            synthesisCallback.done();
         }
-        synthesisCallback.done();
     }
 
     private void startForegroundService() {
