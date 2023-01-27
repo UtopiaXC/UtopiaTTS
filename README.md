@@ -1,7 +1,22 @@
 # Utopia TTS (WIP)
 This is an Android TTS engine based on Microsoft TTS with personal token.  
-这是一个基于微软TTS的安卓文字转语音引擎，使用个人Token。  
+这是一个基于微软TTS的安卓文字转语音引擎，使用个人Token。
 正在开发中  
+
+### 使用教程
+暂无
+
+### 鸣谢
+大佬[ag2s20150909](https://github.com/ag2s20150909)的[TTS](https://github.com/ag2s20150909/TTS)项目
+
+### 演示  
+#### 应用截图
+![App界面](DemoMedia/ScreenShoot.png)  
+
+#### 演示视频
+视频见[使用演示：medias/ScreenRecord.mp4](DemoMedia/ScreenRecord.mp4)
+
+### 开发进程
   
 20220929：微软仿佛有什么大病，才写了三天，五十万字的额度就耗尽了，这绝对不可能啊。算了，之后再说吧，躺了。至于官网Demo驱动的，还是去用ag2s写的TTS吧，日
 
